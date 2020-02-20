@@ -1,25 +1,71 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Player from './Components/Player';
+import Header from './Components/Header';
+import styled from 'styled-components'
 
-function App() {
+const Body = styled.div`
+  @media only screen and (orientation: portrait) {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    overflow: none;
+    scroll: none;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0rem;
+  }
+  @media (min-width: 800px) {
+    position: fixed;
+    width: 80vw;
+    height: 100vh;
+    top: 0rem;
+    left: 10vw;
+    background-color: black;
+    overflow: none;
+    scroll: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0rem;
+  }
+  
+`;
+
+const App = () => {
+  const [data, setData] = useState({tracks: []});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        'http://mariner.whatbox.ca:18000/status-json.xsl',
+      );
+      const response = {
+        adminEmail: result.data.icestats.admin,
+        tracks: result.data.icestats.source.map((s, i) => {
+          return {
+            id: 'track' + i,
+            genre: s.genre || null,
+            title: s.title || null,
+            url: s.listenurl || null,
+            date: s.stream_start || null,
+            desc: s.server_description || null,
+            heardBy: s.listener_peak || null,
+            artist: s.artist || null
+          }
+        })
+      }
+      setData(response);
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Body>
+      <Header />
+      <Player tracks={data.tracks} />
+    </Body>
   );
 }
 
