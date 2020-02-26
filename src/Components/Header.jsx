@@ -40,7 +40,7 @@ const RadioBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border: .1rem solid pink;
+    border: .3rem solid pink;
   }
 `;
 
@@ -50,6 +50,9 @@ const Radio = styled.div`
   margin: 0;
   font-family: 'Dosis', cursive;
   font-size: 1.8rem;
+  @media (min-width: 800px) {
+    font-size: 3rem;
+  }
 `;
 
 
