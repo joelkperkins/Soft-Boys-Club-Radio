@@ -22,7 +22,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
-        'http://mariner.whatbox.ca:18000/status-json.xsl',
+        'https://mariner.whatbox.ca:18000/status-json.xsl',
       );
       const response = {
         adminEmail: result.data.icestats.admin,
