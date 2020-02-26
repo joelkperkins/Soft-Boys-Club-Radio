@@ -2,15 +2,22 @@ import React from 'react';
 import styled from 'styled-components'
 
 const Body = styled.div`
-  width: 55%;
-  padding: 1rem;
-  border-radius: 1rem;
-  background-color: rgb(0, 0, 0, .5)
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-evenly;
 `;
 
-const Item = styled.div`
+const Genre = styled.div`
   font-size: .8rem;
   font-family: 'Raleway', cursive;
+  color: white;
+`;
+
+const Title = styled.div`
+  font-size: 1.3rem;
+  font-family: 'Oswald', cursive;
   color: white;
 `;
 
@@ -18,9 +25,8 @@ const TrackInfo = ({genre, title, date, heardBy}) => {
 
   return (
     <Body> 
-      <Item>{`${title}`}</Item>
-      <br />
-      <Item>{`This ${genre} experience has been played by ${heardBy} individuals since ${date.slice(0, 16)}`}</Item>
+      <Title>{`${title}`}</Title>
+      <Genre>{`*${genre}`}</Genre>
     </Body>
   )
 }

@@ -1,27 +1,18 @@
 import React from 'react'
-import { MdPlayCircleOutline, MdPauseCircleOutline } from 'react-icons/md'
+import { FiPlay } from 'react-icons/fi'
+import styled from 'styled-components';
 import Spinner from 'react-spinkit';
-import styled from 'styled-components'
 
-
-const Icon = styled.div`
-  position: inherit;
-`;
-
-const Button = ({id, playing}) => {
-  console.log(id !== playing/id )
-  return (playing.id !== id) 
-    ? (
-        <Icon>
-          <MdPlayCircleOutline color= "rgb(254, 160, 72, .7)" size="7rem" />
-        </Icon>
-      )
-    : (
-        <Icon>
-          <MdPauseCircleOutline color= "rgb(254, 160, 72, .7)" size="7rem" />
-          <Spinner name="line-scale-pulse-out" color="orange"/>
-        </Icon>
-    );
+const Button = ({playing, handleClick}) => {
+  const Icon = styled.div`
+    width: 15%;
+    display: flex;
+  `;
+  return <Icon>
+    {(!playing) 
+      ? <FiPlay color= "white" size="2rem" onClick={() => handleClick()}/> 
+      : <Spinner name="line-scale-pulse-out" color="white" onClick={() => handleClick()}/>}
+    </Icon>
 };
 
 export default Button;

@@ -7,14 +7,49 @@ const Banner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #f7f5f7
+  background-color: #f7f5f7;
+  padding-left: .5rem;
 `;
 
 const Letter = styled.div`
   font-family: 'Arima Madurai', cursive;
   color: black;
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 800;
+  background-color: #f7f5f7
+`;
+
+const RadioBox = styled.div`
+@media only screen and (orientation: portrait) {
+    transform: rotate(-5deg);
+    width: 20%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: .1rem solid pink;
+    border-radius: .5rem;
+  }
+  @media (min-width: 800px) {
+    border-radius: .5rem;
+    transform: rotate(-4deg);
+    width: 20%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: .1rem solid pink;
+  }
+`;
+
+const Radio = styled.div`
+  color: pink;
+  padding: 0;
+  margin: 0;
+  font-family: 'Dosis', cursive;
+  font-size: 1.8rem;
 `;
 
 
@@ -25,16 +60,19 @@ const Header = () => {
       <Letter>O</Letter>
       <Letter>F</Letter>
       <Letter>T</Letter>
-      <MdMoreHoriz color="white" size="1rem" />
+      <MdMoreHoriz color="white" size=".2rem" />
       <Letter>B</Letter>
       <Letter>O</Letter>
       <Letter>Y</Letter>
       <Letter>S</Letter>
-      <MdMoreHoriz color="white" size="1rem" />
+      <MdMoreHoriz color="white" size=".2rem" />
       <Letter>C</Letter>
       <Letter>L</Letter>
       <Letter>U</Letter>
       <Letter>B</Letter>
+      <RadioBox>
+        <Radio>RADIO</Radio>
+      </RadioBox>
     </Banner>
   )
 };

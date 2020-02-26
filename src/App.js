@@ -5,7 +5,6 @@ import Header from './Components/Header';
 import styled from 'styled-components'
 
 const Body = styled.div`
-  @media only screen and (orientation: portrait) {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -15,22 +14,6 @@ const Body = styled.div`
     display: flex;
     flex-direction: column;
     padding: 1rem 0rem;
-  }
-  @media (min-width: 800px) {
-    position: fixed;
-    width: 80vw;
-    height: 100vh;
-    top: 0rem;
-    left: 10vw;
-    background-color: black;
-    overflow: none;
-    scroll: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0rem;
-  }
-  
 `;
 
 const App = () => {
@@ -60,7 +43,6 @@ const App = () => {
     };
     fetchData();
   }, []);
-
   return (
     <Body>
       <Header />
