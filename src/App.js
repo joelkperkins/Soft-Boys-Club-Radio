@@ -13,7 +13,7 @@ const Body = styled.div`
     scroll: none;
     display: flex;
     flex-direction: column;
-    padding: 1rem 0rem;
+    align-items: center;
 `;
 
 const App = () => {

@@ -4,12 +4,13 @@ import styled from 'styled-components';
 
 const Body = styled.div`
   height: 100%;
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
+  border-left: solid .3rem white;
 `;
 
 const Player = ({ tracks }) => {

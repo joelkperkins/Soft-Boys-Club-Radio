@@ -11,7 +11,7 @@ const Row = styled.div`
     align-items: center;
     padding: 1rem;
     overflow: none;
-    border-top: .1rem dashed rgb(225, 225, 225, .3);
+    border-bottom: .1rem dashed rgb(225, 225, 225, .3);
 `;
 
 const Audio = styled.audio`
@@ -29,19 +29,19 @@ const Track = ({index, track }) => {
   }, [thisTrack, track.url]);
 
   const handleClick = () => {
+    setPlaying(!playing);
     if(playing) {
       thisTrack.pause();
     } else {
       thisTrack.play();
     }
-    setPlaying(!playing);
   }
 
   return ( 
     <Row key={`track-key-${index}`}>
       <Audio id={track.url} src={track.url}></Audio>
       <TrackInfo title={track.title} artist={track.artist} genre={track.genre} desc={track.desc} heardBy={track.heardBy} date={track.date} />
-      <Button id={track.url}playing={playing} handleClick={() => handleClick()}/>
+      <Button id={track.url} playing={playing} handleClick={() => handleClick()}/>
     </Row>
   )
 }

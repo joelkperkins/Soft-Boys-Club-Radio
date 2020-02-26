@@ -6,7 +6,10 @@ import Spinner from 'react-spinkit';
 const Button = ({playing, handleClick}) => {
   const Icon = styled.div`
     width: 15%;
+    height: 100%;
     display: flex;
+    align-items: center;
+    justify-content: space-around;
   `;
   return <Icon>
     {(!playing) 
