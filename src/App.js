@@ -33,9 +33,10 @@ const App = () => {
             title: s.title || null,
             url: s.listenurl || null,
             date: s.stream_start || null,
+            station: s.server_name || null,
             desc: s.server_description || null,
             heardBy: s.listener_peak || null,
-            artist: s.artist || null
+            type: s.server_type || null
           }
         })
       }
