@@ -30,12 +30,13 @@ const App = () => {
           return {
             id: 'track' + i,
             genre: s.genre || null,
-            title: s.title || null,
+            title: s.title || '<no track data>',
             url: s.listenurl || null,
             date: s.stream_start || null,
+            station: s.server_name || null,
             desc: s.server_description || null,
             heardBy: s.listener_peak || null,
-            artist: s.artist || null
+            type: s.server_type || null
           }
         })
       }

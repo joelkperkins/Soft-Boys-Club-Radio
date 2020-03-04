@@ -20,7 +20,7 @@ const Audio = styled.audio`
 
 const Track = ({index, track }) => {
   const [playing, setPlaying] = useState(false);
-  const [thisTrack, setThisTrack] = useState(null)
+  const [thisTrack, setThisTrack] = useState(null);
 
   useEffect(() => {
     if (thisTrack === null) {
@@ -39,8 +39,8 @@ const Track = ({index, track }) => {
 
   return ( 
     <Row key={`track-key-${index}`}>
-      <Audio id={track.url} src={track.url}></Audio>
-      <TrackInfo title={track.title} artist={track.artist} genre={track.genre} desc={track.desc} heardBy={track.heardBy} date={track.date} />
+      <Audio id={track.url} src={track.url} type={track.type}></Audio>
+      <TrackInfo title={track.title} artist={track.artist} genre={track.genre} station={track.station} heardBy={track.heardBy} date={track.date} />
       <Button id={track.url} playing={playing} handleClick={() => handleClick()}/>
     </Row>
   )

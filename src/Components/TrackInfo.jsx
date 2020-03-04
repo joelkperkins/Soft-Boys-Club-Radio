@@ -21,7 +21,7 @@ const Title = styled.div`
   color: white;
 `;
 
-const TrackInfo = ({genre, title, date, heardBy}) => {
+const TrackInfo = ({genre, title, station, date, heardBy}) => {
 
   return (
     <Body> 
