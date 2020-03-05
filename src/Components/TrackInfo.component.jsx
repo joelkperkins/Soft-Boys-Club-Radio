@@ -12,11 +12,17 @@ const Body = styled.div`
 const Genre = styled.div`
   font-size: .8rem;
   font-family: 'Raleway', cursive;
+  color: #B8B6B6;
+`;
+
+const Station = styled.div`
+  font-size: 1.3rem;
+  font-family: 'Oswald', cursive;
   color: white;
 `;
 
-const Title = styled.div`
-  font-size: 1.3rem;
+const NowPlaying = styled.div`
+  font-size: 1rem;
   font-family: 'Oswald', cursive;
   color: white;
 `;
@@ -25,7 +31,8 @@ const TrackInfo = ({genre, title, station, date, heardBy}) => {
 
   return (
     <Body> 
-      <Title>{`${title}`}</Title>
+      <Station>{`${station}`}</Station>
+      <NowPlaying>{`Now Playing: ${title}`}</NowPlaying>
       <Genre>{`*${genre}`}</Genre>
     </Body>
   )
