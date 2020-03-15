@@ -41,7 +41,7 @@ const Track = ({index, track }) => {
     <Row key={`track-key-${index}`}>
       <Audio id={track.url} src={track.url} type={track.type}></Audio>
       <TrackInfo title={track.title} artist={track.artist} genre={track.genre} station={track.station} heardBy={track.heardBy} date={track.date} />
-      <Button id={track.url} playing={playing} handleClick={() => handleClick()}/>
+      <Button id={track.url} playing={playing} trackurl={track.url} handleClick={() => handleClick()}/>
     </Row>
   )
 }
