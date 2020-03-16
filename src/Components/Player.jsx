@@ -13,10 +13,14 @@ const Body = styled.div`
   border-left: solid .3rem white;
 `;
 
-const Player = ({ tracks }) => {
+const Player = ({ tracks, email }) => {
   let tracksList;
+  console.log(tracks);
   if (tracks && tracks.length) {
     tracksList = tracks.map((track, i) => <Track key={`track#${i}`} index={i} track={track} />)
+  }
+  else if (email) {
+    console.info("nothing to play? email " +  email)
   }
   
   return (

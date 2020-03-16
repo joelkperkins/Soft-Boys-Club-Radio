@@ -21,6 +21,43 @@ const sslUrl = (trackUrl) => {
   let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
   return siteUrl + keyUrl;
 };
+const getTracks = (source) => {
+  // zero sources
+  if (!source) {
+    return [];
+  }
+  //single source
+  if (!Array.isArray(source)) {
+    console.log("single source");
+
+    return [{
+      id: 'track0',
+      genre: source.genre || null,
+      title: source.title || '<no track data>',
+      url: sslUrl(source.listenurl),
+      date: source.stream_start || null,
+      station: source.server_name || null,
+      desc: source.server_description || null,
+      heardBy: source.listener_peak || null,
+      type: source.server_type || null
+    }];
+
+  //array of sources
+  } else {
+    return source.map((s, i) => ({
+      id: 'track' + i,
+      genre: s.genre || null,
+      title: s.title || '<no track data>',
+      url: sslUrl(s.listenurl),
+      date: s.stream_start || null,
+      station: s.server_name || null,
+      desc: s.server_description || null,
+      heardBy: s.listener_peak || null,
+      type: s.server_type || null
+      })
+    )
+  } 
+};
 
 const App = () => {
   const [data, setData] = useState({tracks: []});
@@ -32,37 +69,9 @@ const App = () => {
         siteUrl + "/status-json.xsl"
       );
 
-      //immediately invoked function expression
       const response = {
         adminEmail: result.data.icestats.admin,
-        tracks: !Array.isArray(result.data.icestats.source)
-          ? ((s=result.data.icestats.source) => (
-            [{
-              id: 'track0',
-              genre: s.genre || null,
-              title: s.title || '<no track data>',
-              url: sslUrl(s.listenurl),
-              date: s.stream_start || null,
-              station: s.server_name || null,
-              desc: s.server_description || null,
-              heardBy: s.listener_peak || null,
-              type: s.server_type || null
-            }]
-          ))()
-          : result.data.icestats.source.map((s, i) => {
-            return {
-              id: 'track' + i,
-              genre: s.genre || null,
-              title: s.title || '<no track data>',
-              url: sslUrl(s.listenurl),
-              date: s.stream_start || null,
-              station: s.server_name || null,
-              desc: s.server_description || null,
-              heardBy: s.listener_peak || null,
-              type: s.server_type || null
-            }
-          }
-        )
+        tracks: getTracks(result.data.icestats.source)
       }
 
       setData(response);
@@ -73,7 +82,7 @@ const App = () => {
   return (
     <Body>
       <Header />
-      <Player tracks={data.tracks} />
+      <Player tracks={data.tracks} email={data.adminEmail}/>
     </Body>
   );
 }
