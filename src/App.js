@@ -16,6 +16,12 @@ const Body = styled.div`
     align-items: center;
 `;
 
+const siteUrl = 'https://icecast.softboys.club:18000';
+const sslUrl = (trackUrl) => {
+  let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
+  return siteUrl + keyUrl;
+};
+
 const App = () => {
   const [data, setData] = useState({tracks: []});
 
@@ -23,7 +29,7 @@ const App = () => {
     const fetchData = async () => {
 
       const result = await axios.get(
-        'https://icecast.softboys.club:18000/status-json.xsl',
+        siteUrl + "/status-json.xsl"
       );
 
       //immediately invoked function expression
@@ -35,7 +41,7 @@ const App = () => {
               id: 'track0',
               genre: s.genre || null,
               title: s.title || '<no track data>',
-              url: s.listenurl || null,
+              url: sslUrl(s.listenurl),
               date: s.stream_start || null,
               station: s.server_name || null,
               desc: s.server_description || null,
@@ -48,7 +54,7 @@ const App = () => {
               id: 'track' + i,
               genre: s.genre || null,
               title: s.title || '<no track data>',
-              url: s.listenurl || null,
+              url: sslUrl(s.listenurl),
               date: s.stream_start || null,
               station: s.server_name || null,
               desc: s.server_description || null,
