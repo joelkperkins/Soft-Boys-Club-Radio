@@ -1,4 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -37,32 +36,18 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### `version history`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* v0.0.1 : Icecast Server deployed, hosting a test station.
+* v0.0.2 : Icecast client deployed, hosting test station.
+* v0.0.3 : Station #1 added to server
+* v0.0.4 : Alpha UI deployed to test environment
+* v0.0.5 : Alpha UI renders variable number of stations
+* v0.0.6 : Alpha UI plays, pauses, renders playing animation.
+* v0.0.7 : Deploy Alpha UI on Netlify
+* V0.0.8 : SSL encryption for main server route, change URL endpoint for media data
+* v0.0.9 : Update favicon icons
+* v0.1.0 : Deploy Beta UI, cassettes and radio in test environment
+* v0.1.1 : Mobile and Desktop friendly UI render
+* v0.1.2 : add version number to UI, Deploy Beta UI to Netlify
+* v0.1.3 : Add SSL encryption to all routes, all the way home
