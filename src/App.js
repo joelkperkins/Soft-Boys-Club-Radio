@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Player from './Components/Player';
-import Header from './Components/Header';
+import Player from './Components/Player/Player.component';
+import Header from './Components/Header.component';
 import styled from 'styled-components'
 
 const Body = styled.div`
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-    overflow: none;
-    scroll: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const siteUrl = 'https://icecast.softboys.club:18000';
@@ -58,6 +59,13 @@ const getTracks = (source) => {
     )
   } 
 };
+const Footer = styled.div`
+  position: fixed;
+  bottom: .5rem;
+  left: 1rem;
+  font-family: 'Arima Madurai', cursive;
+  color: gray;
+`
 
 const App = () => {
   const [data, setData] = useState({tracks: []});
@@ -80,9 +88,10 @@ const App = () => {
   }, []);
 
   return (
-    <Body>
+    <Body id="main">
       <Header />
-      <Player tracks={data.tracks} email={data.adminEmail}/>
+      <Player tracks={data.tracks} />
+      <Footer>v0.1.3</Footer>
     </Body>
   );
 }
