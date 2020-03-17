@@ -163,7 +163,12 @@ const Eject = styled.button`
           <Pause onClick={() => controlAudio('pause')}><GiPauseButton size='2rem' /></Pause>
         </motion.div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Eject onClick={() => setActiveTrack(null)}>< MdEject size='2rem' /></Eject>
+          <Eject onClick={() => {
+            controlAudio('pause');
+            setActiveTrack(null)}
+          }>
+            < MdEject size='2rem' />
+          </Eject>
         </motion.div>
       </RadioButtons>
       <RadioMain>
