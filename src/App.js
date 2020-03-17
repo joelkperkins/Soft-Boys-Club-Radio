@@ -17,6 +17,14 @@ const Body = styled.div`
   align-items: center;
 `;
 
+const Footer = styled.div`
+  position: fixed;
+  bottom: .5rem;
+  left: 1rem;
+  font-family: 'Arima Madurai', cursive;
+  color: gray;
+`
+
 const App = () => {
   const [data, setData] = useState({tracks: []});
 
@@ -50,6 +58,7 @@ const App = () => {
     <Body id="main">
       <Header />
       <Player tracks={data.tracks} />
+      <Footer>v0.1.2</Footer>
     </Body>
   );
 }

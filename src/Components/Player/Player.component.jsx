@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Radio from '../Radio/Radio.component';
 import Cassette from '../Cassette/Cassette.component';
 import styled from 'styled-components';

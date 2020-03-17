@@ -38,10 +38,10 @@ const CassetteClosed = styled.div`
   padding-top: .25rem;
   padding-bottom: .25rem;
   width: 15rem;
-  height: auto;
+  height: 4rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   align-content: center;
   cursor: pointer;
@@ -62,7 +62,6 @@ const CassetteBottom = styled.div`
   border: solid .1rem black;
   border-radius: .3rem;
   height: 1.3rem;
-  margin-top: auto;
   background: #fffd82;
 `;
 
@@ -84,45 +83,66 @@ const Hole = styled.div`
   border: dashed .3rem white;
 `;
 
-// function to get the y value of an element
+// function to get the x, y value of an element
 const getPos = (el) => {
-  for (var ly=0; el != null; ly += el.offsetTop, el = el.offsetParent);
-  return ly;
+  for (var ly=0, lx=0; el != null; lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
+  return {x: lx, y: ly};
+}
+
+const checkY = (y, trackXY, thisTrack, raidoInsertXY, activeTrack) => {
+  if ((trackXY.current.y + y.get() + thisTrack.current.clientHeight >= raidoInsertXY.current.y) && (!activeTrack)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+const checkX = (x, trackXY, thisTrack, raidoInsertXY, activeTrack) => {
+  if ((trackXY.current.x + x.get() + thisTrack.current.clientHeight >= raidoInsertXY.current.x) && (!activeTrack)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 const Cassette = ({activeTrack, track, index, constraintsRef, reduced, setActiveTrack}) => {
   const thisTrack = useRef();
-  const yTrack = useRef();
-  const yRaidoInsert = useRef();
+  const trackXY = useRef();
+  const raidoInsertXY = useRef();
   const y = useMotionValue(0);
+  const x = useMotionValue(0);
 
   // gets the y values needed for track selection
   useEffect(() => {
     // get the track ele
     thisTrack.current = document.getElementById(`track-key-${index}`);
-    // initial y value for track ele
-    yTrack.current = getPos(thisTrack.current);
+    // initial x, y value for track ele
+    trackXY.current = getPos(thisTrack.current);
+    // get track loader
+    const trackLoader = document.getElementById('insert-here');
     // initial y value for the track loader
-    yRaidoInsert.current = document.getElementById('insert-here');
-    // the y value at the bottom of the track loader, use this as reference for when to set a track to active
-    yRaidoInsert.current = getPos(yRaidoInsert.current) + yRaidoInsert.current.clientHeight;
+    raidoInsertXY.current = getPos(trackLoader);
+    // the x, y value at the bottom of the track loader, use this as reference for when to set a track to active
+    raidoInsertXY.current.y += trackLoader.clientHeight;
   }, [index]);
 
   // allows a user to set a track to active by dragging it to the loader
   useEffect(() => {
     // uses the initial y value of the element + the amount it was dragged to determine if it has been dragged down to the track loader
     function checkActive() {
-      if ((yTrack.current + y.get() + thisTrack.current.clientHeight >= yRaidoInsert.current) && (!activeTrack)) {
+      if (checkY(y, trackXY, thisTrack, raidoInsertXY, activeTrack) && checkX(x, trackXY, thisTrack, raidoInsertXY, activeTrack)) {
         setActiveTrack(track);
       }
     }
 
     const unsubscribeY = y.onChange(checkActive)
+    const unsubscribeX = x.onChange(checkActive)
 
     return () => {
-      unsubscribeY()
+      unsubscribeY();
+      unsubscribeX();
     }
-  }, [activeTrack, setActiveTrack, track, y]);
+  }, [activeTrack, setActiveTrack, track, x, y]);
 
   if (reduced) {
     return (
@@ -132,9 +152,9 @@ const Cassette = ({activeTrack, track, index, constraintsRef, reduced, setActive
     )
   } else if (activeTrack === null || activeTrack.station !== track.station) {
     return (
-      <motion.div id={`track-key-${index}`} drag style={{ y }} dragConstraints={constraintsRef} >
+      <motion.div id={`track-key-${index}`} drag style={{ x, y }} dragConstraints={constraintsRef} >
         <CassetteOpen>
-          <Title>{track.station}</Title>
+        <Title>{track.station}</Title>
           <Holes>
               <Hole></Hole>
               <Hole></Hole>
