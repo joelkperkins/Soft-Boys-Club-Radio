@@ -58,7 +58,7 @@ const App = () => {
     <Body id="main">
       <Header />
       <Player tracks={data.tracks} />
-      <Footer>v0.1.2</Footer>
+      <Footer>v0.1.3</Footer>
     </Body>
   );
 }
