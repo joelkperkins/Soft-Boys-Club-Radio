@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Cassette from '../Cassette/Cassette.component';
 import styled from 'styled-components';
 import { motion } from "framer-motion"
@@ -74,69 +74,80 @@ const RadioBody = styled.div`
   align-self: flex-end;
 `;
 
+const EMPTY = 0;
+const PLAYING = 1;
+const LOADED = 2;
+
 const Radio = ({activeTrack, setActiveTrack}) => {
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState(EMPTY);
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(false);
-  //let nowPlaying = '<Song Name>';
-  const [nowPlaying, setNowPlaying] = useState('<CLICK PLAY!>');
-
-  const siteUrl = 'https://icecast.softboys.club:18000';
-  const fetchData = async () => {
-    //NEED ICECAST TRACK INDEX
-    if(activeTrack) {
-      const icecastIndex = activeTrack.id.slice(-1);
-
-      const result = await axios.get(
-        siteUrl + "/status-json.xsl"
-      );
-
-      //IF ONE SOURCE, ICESTATS HAS NO ARRAY
-      if(Array.isArray(result.data.icestats.source))
-        setNowPlaying(result.data.icestats.source[icecastIndex].title);
-      else setNowPlaying(result.data.icestats.source.title);
-    }
-  };
+  const [nowPlaying, setNowPlaying] = useState('<LOADING>');
+  const intervalRef = useRef(null);
 
   useEffect(() => {
     if (activeTrack) {
-      //setNowPlaying(activeTrack.title);
-      setStatus(1);
+      //setNowPlaying(activeTrack.title); may be outdated by time of play
+      setStatus(LOADED);
       setAudio(document.getElementById('audio'));
     } else {
-      setStatus(0);
+      setStatus(EMPTY);
       setAudio(null);
     }
   }, [activeTrack])
 
   const statusBank = {
     0: 'Please Insert a Cassette!',
-    1: `Now Playing: ${nowPlaying}`
+    1: `Now Playing: ${nowPlaying}`,
+    2: `Press Play?`
   }
 
   const controlAudio = (input) => {
     if (audio && input === 'play') {
       audio.play();
       setPlaying(true);
+      setStatus(PLAYING);
     } else if (audio && input === 'pause') {
       audio.pause();
       setPlaying(false);
+      setStatus(LOADED);
+      //end the polling of new tracknames
+      clearInterval(intervalRef);
     }
   }
 
   useEffect( 
     () => {
+      const siteUrl = 'https://icecast.softboys.club:18000';
+
+      const fetchData = async () => {
+        //NEED ICECAST TRACK INDEX
+        if (activeTrack) {
+          const icecastIndex = activeTrack.id.slice(-1);
+
+          const result = await axios.get(
+            siteUrl + "/status-json.xsl"
+          );
+
+          //IF ONE SOURCE, ICESTATS HAS NO ARRAY
+          if (Array.isArray(result.data.icestats.source)) {
+            setNowPlaying(result.data.icestats.source[icecastIndex].title);
+          } else {
+            setNowPlaying(result.data.icestats.source.title);
+          }
+        }
+      };
       if (playing) {
         //update on play, then every 10 seconds
         fetchData();
-        const interval = setInterval(
+        const id = setInterval(
           () => {
             fetchData(); 
           }, 10000);
-        //cleanup effect
-        return () => clearInterval(interval);
+        //save interval for cleanup
+        intervalRef.current = id;
       }
-    }
+    }, [playing, activeTrack]
   );
 
   const Play = styled.button`
