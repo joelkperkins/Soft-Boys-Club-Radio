@@ -91,13 +91,11 @@ const Radio = ({activeTrack, setActiveTrack}) => {
         siteUrl + "/status-json.xsl"
       );
 
-      console.log("fetching data from")
       //IF ONE SOURCE, ICESTATS HAS NO ARRAY
       if(Array.isArray(result.data.icestats.source))
         setNowPlaying(result.data.icestats.source[icecastIndex].title);
       else setNowPlaying(result.data.icestats.source.title);
     }
-    else console.log("fetching when no active track");
   };
 
   useEffect(() => {
