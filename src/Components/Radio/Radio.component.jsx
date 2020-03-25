@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { motion } from "framer-motion"
 import { GiPlayButton, GiPauseButton } from 'react-icons/gi';
 import { MdEject } from 'react-icons/md';
+import axios from 'axios';
 
 const RadioMain = styled.div`
   width: 17rem;
@@ -77,14 +78,31 @@ const Radio = ({activeTrack, setActiveTrack}) => {
   const [status, setStatus] = useState(0);
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(false);
-  let nowPlaying = '<Song Name>';
+  //let nowPlaying = '<Song Name>';
+  const [nowPlaying, setNowPlaying] = useState('<CLICK PLAY!>');
 
-  if (activeTrack) {
-    nowPlaying = activeTrack.title;
-  }
+  const siteUrl = 'https://icecast.softboys.club:18000';
+  const fetchData = async () => {
+    //NEED ICECAST TRACK INDEX
+    if(activeTrack) {
+      const icecastIndex = activeTrack.id.slice(-1);
+
+      const result = await axios.get(
+        siteUrl + "/status-json.xsl"
+      );
+
+      console.log("fetching data from")
+      //IF ONE SOURCE, ICESTATS HAS NO ARRAY
+      if(Array.isArray(result.data.icestats.source))
+        setNowPlaying(result.data.icestats.source[icecastIndex].title);
+      else setNowPlaying(result.data.icestats.source.title);
+    }
+    else console.log("fetching when no active track");
+  };
 
   useEffect(() => {
     if (activeTrack) {
+      //setNowPlaying(activeTrack.title);
       setStatus(1);
       setAudio(document.getElementById('audio'));
     } else {
@@ -107,6 +125,21 @@ const Radio = ({activeTrack, setActiveTrack}) => {
       setPlaying(false);
     }
   }
+
+  useEffect( 
+    () => {
+      if (playing) {
+        //update on play, then every 10 seconds
+        fetchData();
+        const interval = setInterval(
+          () => {
+            fetchData(); 
+          }, 10000);
+        //cleanup effect
+        return () => clearInterval(interval);
+      }
+    }
+  );
 
   const Play = styled.button`
   z-index: 1;
