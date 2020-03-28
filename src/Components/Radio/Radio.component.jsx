@@ -74,12 +74,77 @@ const RadioBody = styled.div`
   align-self: flex-end;
 `;
 
-const EMPTY = 0;
-const PLAYING = 1;
-const LOADED = 2;
+const Play = styled.button`
+  z-index: 1;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border-radius: 2rem .5rem .5rem .5rem;
+  border-bottom: outset .3rem lightgray;
+  border-right: outset .3rem lightgray;
+  transform: skew(-30deg, 0deg);
+  height: 2rem;
+  width 4rem;
+`;
+
+const PlayActive = styled(Play)`
+  background-color: #29A745;
+  color: #1eff4f;
+`;
+
+const PlayInactive = styled(Play)`
+  background-color:white;
+  color: black;
+`;
+
+const Pause = styled.button`
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .5rem;
+  border-bottom: outset .3rem lightgray;
+  border-right: outset .3rem lightgray;
+  transform: skew(-30deg, 0deg);
+  height: 2rem;
+  width 4rem;
+`;
+
+const PauseActive = styled(Pause)`
+  background-color: #FFC107;
+  color: #fff600;
+`;
+
+const PauseInactive = styled(Pause)`
+  background-color: white;
+  color: black;
+`;
+
+const Eject = styled.button`
+  z-index: 1;  
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border-radius: .5rem;
+  border-bottom: outset .3rem lightgray;
+  border-right: outset .3rem lightgray;
+  transform: skew(-30deg, 0deg);
+  height: 2rem;
+  width 8rem;
+`;
+
+const EjectActive = styled(Eject)`
+  background-color: #19A2B8;
+  color: white;
+`;
+
+const EjectInactive = styled(Eject)`
+  background-color: white;
+  color: black;
+`;
 
 const Radio = ({activeTrack, setActiveTrack}) => {
-  const [status, setStatus] = useState(EMPTY);
+  const [status, setStatus] = useState('EMPTY');
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(false);
   const [nowPlaying, setNowPlaying] = useState('<LOADING>');
@@ -88,29 +153,29 @@ const Radio = ({activeTrack, setActiveTrack}) => {
   useEffect(() => {
     if (activeTrack) {
       //setNowPlaying(activeTrack.title); may be outdated by time of play
-      setStatus(LOADED);
+      setStatus('LOADED');
       setAudio(document.getElementById('audio'));
     } else {
-      setStatus(EMPTY);
+      setStatus('EMPTY');
       setAudio(null);
     }
   }, [activeTrack])
 
   const statusBank = {
-    0: 'Please Insert a Cassette!',
-    1: `Now Playing: ${nowPlaying}`,
-    2: `Press Play?`
+    EMPTY: 'Please Insert a Cassette!',
+    PLAYING: `Now Playing: ${nowPlaying}`,
+    LOADED: `Press Play?`
   }
 
   const controlAudio = (input) => {
     if (audio && input === 'play') {
       audio.play();
       setPlaying(true);
-      setStatus(PLAYING);
+      setStatus("PLAYING");
     } else if (audio && input === 'pause') {
       audio.pause();
       setPlaying(false);
-      setStatus(LOADED);
+      setStatus("LOADED");
       //end the polling of new tracknames
       clearInterval(intervalRef);
     }
@@ -150,67 +215,30 @@ const Radio = ({activeTrack, setActiveTrack}) => {
     }, [playing, activeTrack]
   );
 
-  const Play = styled.button`
-  z-index: 1;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  border-radius: 2rem .5rem .5rem .5rem;
-  border-bottom: outset .3rem lightgray;
-  border-right: outset .3rem lightgray;
-  transform: skew(-30deg, 0deg);
-  height: 2rem;
-  width 4rem;
-  background-color: ${activeTrack ? '#29A745' : 'white'};
-  color: ${activeTrack && playing ? '#1eff4f' : activeTrack ? 'white' : 'black'};
-`;
-
-const Pause = styled.button`
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: .5rem;
-  border-bottom: outset .3rem lightgray;
-  border-right: outset .3rem lightgray;
-  transform: skew(-30deg, 0deg);
-  height: 2rem;
-  width 4rem;
-  background-color: ${activeTrack ? '#FFC107' : 'white'};
-  color: ${activeTrack && !playing ? '#fff600' : activeTrack ? 'white' : 'black'};
-`;
-
-const Eject = styled.button`
-  z-index: 1;  
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  border-radius: .5rem;
-  border-bottom: outset .3rem lightgray;
-  border-right: outset .3rem lightgray;
-  transform: skew(-30deg, 0deg);
-  height: 2rem;
-  width 8rem;
-  background-color: ${activeTrack ? '#19A2B8' : 'white'};
-  color: ${activeTrack ? 'white' : 'black'};
-`;
-
   return (
     <RadioBody>
       <RadioButtons>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Play onClick={() => controlAudio('play')}><GiPlayButton size='2rem'/></Play>
+          {activeTrack && <PlayActive onClick={() => controlAudio('play')}><GiPlayButton size='2em'/></PlayActive>}
+          {!activeTrack && <PlayInactive onClick={() => controlAudio('play')}><GiPlayButton size='2em'/></PlayInactive>}
         </motion.div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Pause onClick={() => controlAudio('pause')}><GiPauseButton size='2rem' /></Pause>
+          {activeTrack && <PauseActive onClick={() => controlAudio('pause')}><GiPauseButton size='2em' /></PauseActive>}
+          {!activeTrack && <PauseInactive onClick={() => controlAudio('pause')}><GiPauseButton size='2em' /></PauseInactive>}
         </motion.div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Eject onClick={() => {
+          {activeTrack && <EjectActive onClick={() => {
             controlAudio('pause');
             setActiveTrack(null)}
           }>
-            < MdEject size='2rem' />
-          </Eject>
+            < MdEject size='2em' />
+          </EjectActive>}
+          {!activeTrack && <EjectInactive onClick={() => {
+            controlAudio('pause');
+            setActiveTrack(null)}
+          }>
+            < MdEject size='2em' />
+          </EjectInactive>}
         </motion.div>
       </RadioButtons>
       <RadioMain>

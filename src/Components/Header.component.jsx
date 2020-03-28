@@ -63,12 +63,12 @@ const Header = () => {
       <Letter>O</Letter>
       <Letter>F</Letter>
       <Letter>T</Letter>
-      <MdMoreHoriz color="white" size=".2rem" />
+      <MdMoreHoriz color="white" size=".2em" />
       <Letter>B</Letter>
       <Letter>O</Letter>
       <Letter>Y</Letter>
       <Letter>S</Letter>
-      <MdMoreHoriz color="white" size=".2rem" />
+      <MdMoreHoriz color="white" size=".2em" />
       <Letter>C</Letter>
       <Letter>L</Letter>
       <Letter>U</Letter>
