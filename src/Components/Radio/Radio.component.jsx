@@ -177,7 +177,7 @@ const Radio = ({activeTrack, setActiveTrack}) => {
       setPlaying(false);
       setStatus("LOADED");
       //end the polling of new tracknames
-      clearInterval(intervalRef);
+      clearInterval(intervalRef.current);
     }
   }
 
