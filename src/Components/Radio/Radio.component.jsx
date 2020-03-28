@@ -131,8 +131,6 @@ const Eject = styled.button`
   transform: skew(-30deg, 0deg);
   height: 2rem;
   width 8rem;
-  background-color: #19A2B8
-  color: white;
 `;
 
 const EjectActive = styled(Eject)`
