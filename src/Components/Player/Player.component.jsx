@@ -5,28 +5,26 @@ import styled from 'styled-components';
 import { motion } from "framer-motion"
 import './Player.css';
 
+const Row = styled.div`
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow: none;
 
+  :focus {
+    z-index: 3;
+  }
+`
 
 
 const Player = ({ tracks }) => {
   const constraintsRef = useRef(null);
   const [activeTrack, setActiveTrack] = useState(null);
-
-  const Row = styled.div`
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: 10rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    overflow: none;
-
-    :focus {
-      z-index: 3;
-    }
-  `;
 
   const Cassettes = (tracks && tracks.length) ? tracks.map((track, i) => {
     if (activeTrack === null || activeTrack.station !== track.station) {

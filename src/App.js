@@ -18,9 +18,9 @@ const Body = styled.div`
 `;
 
 const siteUrl = 'https://icecast.softboys.club:18000';
-const sslUrl = (trackUrl) => {
-  let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
-  return siteUrl + keyUrl;
+const ssl = (listenurl) => {
+  let trackpath = !listenurl ? null : listenurl.slice(listenurl.lastIndexOf('/'));
+  return siteUrl + trackpath;
 };
 const getTracks = (source) => {
   // zero sources
@@ -29,13 +29,12 @@ const getTracks = (source) => {
   }
   //single source
   if (!Array.isArray(source)) {
-    console.log("single source");
 
     return [{
       id: 'track0',
       genre: source.genre || null,
       title: source.title || '<no track data>',
-      url: sslUrl(source.listenurl),
+      url: ssl(source.listenurl),
       date: source.stream_start || null,
       station: source.server_name || null,
       desc: source.server_description || null,
@@ -49,7 +48,7 @@ const getTracks = (source) => {
       id: 'track' + i,
       genre: s.genre || null,
       title: s.title || '<no track data>',
-      url: sslUrl(s.listenurl),
+      url: ssl(s.listenurl),
       date: s.stream_start || null,
       station: s.server_name || null,
       desc: s.server_description || null,

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Cassette from '../Cassette/Cassette.component';
 import styled from 'styled-components';
 import { motion } from "framer-motion"
 import { GiPlayButton, GiPauseButton } from 'react-icons/gi';
 import { MdEject } from 'react-icons/md';
+import axios from 'axios';
 
 const RadioMain = styled.div`
   width: 17rem;
@@ -73,42 +74,7 @@ const RadioBody = styled.div`
   align-self: flex-end;
 `;
 
-const Radio = ({activeTrack, setActiveTrack}) => {
-  const [status, setStatus] = useState(0);
-  const [audio, setAudio] = useState(null);
-  const [playing, setPlaying] = useState(false);
-  let nowPlaying = '<Song Name>';
-
-  if (activeTrack) {
-    nowPlaying = activeTrack.title;
-  }
-
-  useEffect(() => {
-    if (activeTrack) {
-      setStatus(1);
-      setAudio(document.getElementById('audio'));
-    } else {
-      setStatus(0);
-      setAudio(null);
-    }
-  }, [activeTrack])
-
-  const statusBank = {
-    0: 'Please Insert a Cassette!',
-    1: `Now Playing: ${nowPlaying}`
-  }
-
-  const controlAudio = (input) => {
-    if (audio && input === 'play') {
-      audio.play();
-      setPlaying(true);
-    } else if (audio && input === 'pause') {
-      audio.pause();
-      setPlaying(false);
-    }
-  }
-
-  const Play = styled.button`
+const Play = styled.button`
   z-index: 1;
   align-items: center;
   display: flex;
@@ -119,8 +85,16 @@ const Radio = ({activeTrack, setActiveTrack}) => {
   transform: skew(-30deg, 0deg);
   height: 2rem;
   width 4rem;
-  background-color: ${activeTrack ? '#29A745' : 'white'};
-  color: ${activeTrack && playing ? '#1eff4f' : activeTrack ? 'white' : 'black'};
+`;
+
+const PlayActive = styled(Play)`
+  background-color: #29A745;
+  color: #1eff4f;
+`;
+
+const PlayInactive = styled(Play)`
+  background-color:white;
+  color: black;
 `;
 
 const Pause = styled.button`
@@ -134,8 +108,16 @@ const Pause = styled.button`
   transform: skew(-30deg, 0deg);
   height: 2rem;
   width 4rem;
-  background-color: ${activeTrack ? '#FFC107' : 'white'};
-  color: ${activeTrack && !playing ? '#fff600' : activeTrack ? 'white' : 'black'};
+`;
+
+const PauseActive = styled(Pause)`
+  background-color: #FFC107;
+  color: #fff600;
+`;
+
+const PauseInactive = styled(Pause)`
+  background-color: white;
+  color: black;
 `;
 
 const Eject = styled.button`
@@ -149,26 +131,114 @@ const Eject = styled.button`
   transform: skew(-30deg, 0deg);
   height: 2rem;
   width 8rem;
-  background-color: ${activeTrack ? '#19A2B8' : 'white'};
-  color: ${activeTrack ? 'white' : 'black'};
 `;
+
+const EjectActive = styled(Eject)`
+  background-color: #19A2B8;
+  color: white;
+`;
+
+const EjectInactive = styled(Eject)`
+  background-color: white;
+  color: black;
+`;
+
+const Radio = ({activeTrack, setActiveTrack}) => {
+  const [status, setStatus] = useState('EMPTY');
+  const [audio, setAudio] = useState(null);
+  const [playing, setPlaying] = useState(false);
+  const [nowPlaying, setNowPlaying] = useState('<LOADING>');
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    if (activeTrack) {
+      //setNowPlaying(activeTrack.title); may be outdated by time of play
+      setStatus('LOADED');
+      setAudio(document.getElementById('audio'));
+    } else {
+      setStatus('EMPTY');
+      setAudio(null);
+    }
+  }, [activeTrack])
+
+  const statusBank = {
+    EMPTY: 'Please Insert a Cassette!',
+    PLAYING: `Now Playing: ${nowPlaying}`,
+    LOADED: `Press Play?`
+  }
+
+  const controlAudio = (input) => {
+    if (audio && input === 'play') {
+      audio.play();
+      setPlaying(true);
+      setStatus("PLAYING");
+    } else if (audio && input === 'pause') {
+      audio.pause();
+      setPlaying(false);
+      setStatus("LOADED");
+      //end the polling of new tracknames
+      clearInterval(intervalRef);
+    }
+  }
+
+  useEffect( 
+    () => {
+      const siteUrl = 'https://icecast.softboys.club:18000';
+
+      const fetchData = async () => {
+        //NEED ICECAST TRACK INDEX
+        if (activeTrack) {
+          const icecastIndex = activeTrack.id.slice(-1);
+
+          const result = await axios.get(
+            siteUrl + "/status-json.xsl"
+          );
+
+          //IF ONE SOURCE, ICESTATS HAS NO ARRAY
+          if (Array.isArray(result.data.icestats.source)) {
+            setNowPlaying(result.data.icestats.source[icecastIndex].title);
+          } else {
+            setNowPlaying(result.data.icestats.source.title);
+          }
+        }
+      };
+      if (playing) {
+        //update on play, then every 10 seconds
+        fetchData();
+        const id = setInterval(
+          () => {
+            fetchData(); 
+          }, 10000);
+        //save interval for cleanup
+        intervalRef.current = id;
+      }
+    }, [playing, activeTrack]
+  );
 
   return (
     <RadioBody>
       <RadioButtons>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Play onClick={() => controlAudio('play')}><GiPlayButton size='2rem'/></Play>
+          {activeTrack && <PlayActive onClick={() => controlAudio('play')}><GiPlayButton size='2em'/></PlayActive>}
+          {!activeTrack && <PlayInactive onClick={() => controlAudio('play')}><GiPlayButton size='2em'/></PlayInactive>}
         </motion.div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Pause onClick={() => controlAudio('pause')}><GiPauseButton size='2rem' /></Pause>
+          {activeTrack && <PauseActive onClick={() => controlAudio('pause')}><GiPauseButton size='2em' /></PauseActive>}
+          {!activeTrack && <PauseInactive onClick={() => controlAudio('pause')}><GiPauseButton size='2em' /></PauseInactive>}
         </motion.div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Eject onClick={() => {
+          {activeTrack && <EjectActive onClick={() => {
             controlAudio('pause');
             setActiveTrack(null)}
           }>
-            < MdEject size='2rem' />
-          </Eject>
+            < MdEject size='2em' />
+          </EjectActive>}
+          {!activeTrack && <EjectInactive onClick={() => {
+            controlAudio('pause');
+            setActiveTrack(null)}
+          }>
+            < MdEject size='2em' />
+          </EjectInactive>}
         </motion.div>
       </RadioButtons>
       <RadioMain>
