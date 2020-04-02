@@ -164,14 +164,15 @@ const Radio = ({activeTrack, setActiveTrack}) => {
   const statusBank = {
     EMPTY: 'Please Insert a Cassette!',
     PLAYING: `Now Playing: ${nowPlaying}`,
-    LOADED: `Press Play?`
+    LOADED: 'Press Play?',
+    LOADING: 'Loading...1 sec'
   }
 
   const controlAudio = (input) => {
     if (audio && input === 'play') {
       audio.play();
       setPlaying(true);
-      setStatus("PLAYING");
+      setStatus("LOADING");
     } else if (audio && input === 'pause') {
       audio.pause();
       setPlaying(false);
@@ -215,6 +216,11 @@ const Radio = ({activeTrack, setActiveTrack}) => {
     }, [playing, activeTrack]
   );
 
+  const handleCanPlayThrough = () => {
+    setStatus("PLAYING");
+    audio.currentTime = 0;
+  }
+
   return (
     <RadioBody>
       <RadioButtons>
@@ -247,7 +253,7 @@ const Radio = ({activeTrack, setActiveTrack}) => {
           {activeTrack ? <Cassette track={activeTrack} reduced={true} /> : <Insert>------------------------------------</Insert>}
         </RadioInsert>
       </RadioMain>
-      {activeTrack ? <audio id='audio' src={activeTrack.url} /> : <audio></audio> }
+      {activeTrack ? <audio id='audio' preload='none' onCanPlayThrough={handleCanPlayThrough} src={activeTrack.url} /> : <audio></audio> }
     </RadioBody>
   );
 }
