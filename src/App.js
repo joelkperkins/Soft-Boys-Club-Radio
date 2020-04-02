@@ -17,10 +17,9 @@ const Body = styled.div`
   align-items: center;
 `;
 
-const siteUrl = 'https://icecast.softboys.club:18000';
-const ssl = (listenurl) => {
-  let trackpath = !listenurl ? null : listenurl.slice(listenurl.lastIndexOf('/'));
-  return siteUrl + trackpath;
+const sslUrl = (trackUrl) => {
+  let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
+  return process.env.REACT_APP_ICECAST_URL + keyUrl;
 };
 const getTracks = (source) => {
   // zero sources
@@ -73,7 +72,7 @@ const App = () => {
     const fetchData = async () => {
 
       const result = await axios.get(
-        siteUrl + "/status-json.xsl"
+        process.env.REACT_APP_ICECAST_URL + "/status-json.xsl"
       );
 
       const response = {
