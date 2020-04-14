@@ -218,7 +218,6 @@ const Radio = ({activeTrack, setActiveTrack}) => {
 
   const handleCanPlayThrough = () => {
     setStatus("PLAYING");
-    audio.currentTime = 0;
   }
 
   return (
