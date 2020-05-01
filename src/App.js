@@ -7,8 +7,6 @@ import Header from './Components/Header.component';
 // libraires
 import axios from 'axios';
 import styled from 'styled-components'
-import axios from 'axios';
-import dotenv from 'dotenv';
 
 // resouces
 import backgroundImg from './Images/elen.jpg'
@@ -58,9 +56,7 @@ const getTracks = (source) => {
 
 
 const App = () => {
-  
   const [data, setData] = useState({tracks: []});
-  console.log(1, process.env.REACT_APP_ICECAST_URL);
   useEffect(() => {
     const fetchData = async () => {
 
