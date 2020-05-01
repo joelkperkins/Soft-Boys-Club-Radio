@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
+// components
 import Player from './Components/Player/Player.component';
 import Header from './Components/Header.component';
+
+// libraires
 import styled from 'styled-components'
+import axios from 'axios';
+import dotenv from 'dotenv';
 
 const Body = styled.div`
   position: fixed;
@@ -21,6 +26,7 @@ const sslUrl = (trackUrl) => {
   let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
   return process.env.REACT_APP_ICECAST_URL + keyUrl;
 };
+
 const getTracks = (source) => {
   // zero sources
   if (!source) {
@@ -66,8 +72,9 @@ const Footer = styled.div`
 `
 
 const App = () => {
+  
   const [data, setData] = useState({tracks: []});
-
+  console.log(1, process.env.REACT_APP_ICECAST_URL);
   useEffect(() => {
     const fetchData = async () => {
 
