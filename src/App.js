@@ -5,22 +5,14 @@ import Player from './Components/Player/Player.component';
 import Header from './Components/Header.component';
 
 // libraires
+import axios from 'axios';
 import styled from 'styled-components'
 import axios from 'axios';
 import dotenv from 'dotenv';
 
-const Body = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: black;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+// resouces
+import backgroundImg from './Images/elen.jpg'
+import headerImg from './Images/techno.png'
 
 const sslUrl = (trackUrl) => {
   let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
@@ -63,13 +55,7 @@ const getTracks = (source) => {
     )
   } 
 };
-const Footer = styled.div`
-  position: fixed;
-  bottom: .5rem;
-  left: 1rem;
-  font-family: 'Arima Madurai', cursive;
-  color: gray;
-`
+
 
 const App = () => {
   
@@ -93,12 +79,54 @@ const App = () => {
   }, []);
 
   return (
-    <Body id="main">
+    <Body id="main" img={backgroundImg} header={headerImg}>
       <Header />
       <Player tracks={data.tracks} />
       <Footer>v0.1.3</Footer>
     </Body>
   );
 }
+
+const Body = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media only screen and (orientation: portrait) {
+    ${props => props.img && props.header &&
+      `background: 
+        url(${props.header}) 47% 75% no-repeat,
+        url(${props.img}) black center no-repeat;
+      `
+    }
+    ${props => props.img && `background-size: 650px`}
+  }
+
+
+  @media (min-width: 800px) {
+    ${props => props.img && props.header &&
+      `background: 
+        url(${props.header}) 50% 75% no-repeat,
+        url(${props.img}) black center no-repeat;
+      `
+    }
+    ${props => props.img && `background-size: 650px`}
+  }
+`;
+
+const Footer = styled.div`
+  position: fixed;
+  bottom: .5rem;
+  left: 1rem;
+  font-family: 'Arima Madurai', cursive;
+  color: gray;
+`
 
 export default App;

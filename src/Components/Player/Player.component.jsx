@@ -1,26 +1,13 @@
 import React, { useRef, useState } from 'react';
+
+// components
 import Radio from '../Radio/Radio.component';
 import Cassette from '../Cassette/Cassette.component';
+
+// libraries
 import styled from 'styled-components';
 import { motion } from "framer-motion"
 import './Player.css';
-
-const Row = styled.div`
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 10rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  overflow: none;
-
-  :focus {
-    z-index: 3;
-  }
-`
-
 
 const Player = ({ tracks }) => {
   const constraintsRef = useRef(null);
@@ -42,10 +29,37 @@ const Player = ({ tracks }) => {
 
   return (
     <motion.div className="drag-area" ref={constraintsRef}>
-      <Radio activeTrack={activeTrack} setActiveTrack={(e) => setActiveTrack(e)}/>
+      <Bottom>
+        <Radio activeTrack={activeTrack} setActiveTrack={(e) => setActiveTrack(e)}/>
+      </Bottom>
       {Cassettes}
     </motion.div>
   )
 };
+
+const Row = styled.div`
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow: none;
+
+  :focus {
+    z-index: 3;
+  }
+`
+
+const Bottom = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 98%;
+`
 
 export default Player;
