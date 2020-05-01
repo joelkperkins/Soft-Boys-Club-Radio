@@ -74,6 +74,11 @@ const App = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }, []);
+
   return (
     <Body id="main" img={backgroundImg} header={headerImg}>
       <Header />
