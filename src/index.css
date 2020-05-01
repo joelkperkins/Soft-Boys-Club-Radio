@@ -6,6 +6,10 @@ body {
   background: #333e5a;
 }
 
+#root {
+  height: calc(var(--vh, 1vh) * 100);
+}
+
 a {
   color: #fff;
 }
