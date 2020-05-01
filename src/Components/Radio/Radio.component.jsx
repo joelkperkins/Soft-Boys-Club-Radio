@@ -124,7 +124,7 @@ const RadioMain = styled.div`
   height: 9rem;
   background: gray;
   margin-top: auto;
-  border: outset .3rem darkgray;
+  border: outset .4rem darkgray;
   border-radius: 1rem;
   display: flex;
   justify-content: flex-start;
@@ -135,7 +135,7 @@ const RadioMain = styled.div`
 
 const THEME_RADIO_MAIN_GOTH = styled(RadioMain)`
   background: black;
-  border: outset .3rem limegreen;
+  border: outset .4rem limegreen;
 `;
 
 const RadioInsert = styled.div`

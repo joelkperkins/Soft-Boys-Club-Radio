@@ -57,6 +57,7 @@ const getTracks = (source) => {
 
 const App = () => {
   const [data, setData] = useState({tracks: []});
+  const [height, setHeight] = useState('100vh');
   useEffect(() => {
     const fetchData = async () => {
 
@@ -74,8 +75,13 @@ const App = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const vh = window.innerHeight;
+    setHeight(`${vh}px`);
+  }, []);
+
   return (
-    <Body id="main" img={backgroundImg} header={headerImg}>
+    <Body id="main" height={height} img={backgroundImg} header={headerImg}>
       <Header />
       <Player tracks={data.tracks} />
       <Footer>v0.1.3</Footer>
@@ -88,7 +94,7 @@ const Body = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: ${props => props.height};
   background-color: black;
   overflow: hidden;
   display: flex;
