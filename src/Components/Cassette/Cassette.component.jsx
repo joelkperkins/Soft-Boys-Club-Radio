@@ -2,87 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion, useMotionValue } from "framer-motion"
 
-
-const Title = styled.div`
-  text-align: center;
-  font-family: 'Rock Salt', cursive;
-  font-size: .6rem;
-  color: black;
-  width: 90%;
-  height: 3rem;
-  border: solid .1rem black;
-  border-radius: .3rem;
-  padding: .3rem;
-  background: #fffd82;
-`;
-
-const CassetteOpen = styled.div`
-  position: relative;
-  padding-top: .25rem;
-  padding-bottom: .25rem;
-  width: 15rem;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  align-content: center;
-  cursor: pointer;
-  border: double .3rem white;
-  border-radius: .5rem;
-  overflow: hidden;
-  background: #ee4266;
-`;
-
-const CassetteClosed = styled.div`
-  padding-top: .25rem;
-  padding-bottom: .25rem;
-  width: 15rem;
-  height: 4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  align-content: center;
-  cursor: pointer;
-  border-top: double .3rem white;
-  border-left: double .3rem white;
-  border-right: double .3rem white;
-  border-radius: .5rem;
-  overflow: hidden;
-  background: #ee4266
-`;
-
-const CassetteBottom = styled.div`
-  font-family: 'Rock Salt', cursive;
-  font-size: .5rem;
-  display: flex;
-  justify-content: center;
-  width: 12rem;
-  border: solid .1rem black;
-  border-radius: .3rem;
-  height: 1.3rem;
-  background: #fffd82;
-`;
-
-const Holes = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 10rem;
-  padding: 1rem;
-  height: auto;
-`;
-
-const Hole = styled.div`
-  width: 2rem;
-  height: 2rem;
-  background: black;
-  border-radius: 50%;
-  border: dashed .3rem white;
-`;
-
 // function to get the x, y value of an element
 const getPos = (el) => {
   for (var ly=0, lx=0; el != null; lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
@@ -146,25 +65,131 @@ const Cassette = ({activeTrack, track, index, constraintsRef, reduced, setActive
 
   if (reduced) {
     return (
-      <CassetteClosed>
-        <Title>{track.station}</Title>
-      </CassetteClosed> 
+      <THEME_CASSETTE_CLOSED >
+        <THEME_TITLE>{track.station}</THEME_TITLE>
+      </THEME_CASSETTE_CLOSED > 
     )
   } else if (activeTrack === null || activeTrack.station !== track.station) {
     return (
       <motion.div id={`track-key-${index}`} drag style={{ x, y }} dragConstraints={constraintsRef} >
-        <CassetteOpen>
-        <Title>{track.station}</Title>
+        <THEME_CASSETTE_OPEN>
+        <THEME_TITLE>{track.station}</ THEME_TITLE>
           <Holes>
-              <Hole></Hole>
-              <Hole></Hole>
+              <THEME_HOLE ></THEME_HOLE >
+              <THEME_HOLE ></THEME_HOLE >
           </Holes>
-          <CassetteBottom>{track.genre}</CassetteBottom>
-        </CassetteOpen>
+          <THEME_CASSETTE_BOTTOM>{track.genre}</THEME_CASSETTE_BOTTOM>
+        </THEME_CASSETTE_OPEN>
       </motion.div>
     );
   }
 }
+
+const Title = styled.div`
+  text-align: center;
+  font-family: 'Rock Salt', cursive;
+  font-size: .6rem;
+  color: black;
+  width: 90%;
+  height: 3rem;
+  border: solid .1rem black;
+  border-radius: .3rem;
+  padding: .3rem;
+  background: #fffd82;
+`;
+
+const THEME_TITLE = styled(Title)`
+  background: black;
+  border: solid .1rem limegreen;
+  color: hotpink;
+`
+
+const CassetteOpen = styled.div`
+  position: relative;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  width: 15rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  cursor: pointer;
+  border: double .3rem white;
+  border-radius: .5rem;
+  overflow: hidden;
+  background: #ee4266;
+`;
+
+const THEME_CASSETTE_OPEN = styled(CassetteOpen)`
+  background: black;
+  border: double .3rem limegreen;
+`
+
+const CassetteClosed = styled.div`
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  width: 15rem;
+  height: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  cursor: pointer;
+  border-top: double .3rem white;
+  border-left: double .3rem white;
+  border-right: double .3rem white;
+  border-radius: .5rem;
+  overflow: hidden;
+  background: #ee4266;
+`;
+
+const THEME_CASSETTE_CLOSED = styled(CassetteClosed)`
+  background: black;
+  border: double .3rem limegreen;
+`
+
+const CassetteBottom = styled.div`
+  font-family: 'Rock Salt', cursive;
+  font-size: .5rem;
+  display: flex;
+  justify-content: center;
+  width: 12rem;
+  border: solid .1rem black;
+  border-radius: .3rem;
+  height: 1.3rem;
+  background: #fffd82;
+`;
+
+const THEME_CASSETTE_BOTTOM = styled(CassetteBottom)`
+  background: black;
+  border: solid .1rem limegreen;
+  color: hotpink;
+`
+
+const Holes = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 10rem;
+  padding: 1rem;
+  height: auto;
+`;
+
+const Hole = styled.div`
+  width: 2rem;
+  height: 2rem;
+  background: black;
+  border-radius: 50%;
+  border: dashed .3rem white;
+`;
+
+const THEME_HOLE = styled(Hole)`
+  border: dashed .3rem hotpink;
+`
 
 export default Cassette;
 
