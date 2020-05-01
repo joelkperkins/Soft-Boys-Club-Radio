@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
+// components
 import Player from './Components/Player/Player.component';
 import Header from './Components/Header.component';
+
+// libraires
+import axios from 'axios';
 import styled from 'styled-components'
+
+// resouces
+import backgroundImg from './Images/elen.jpg'
+import headerImg from './Images/techno.png'
 
 const siteUrl = 'https://icecast.softboys.club:18000';
 
@@ -70,7 +78,7 @@ const App = () => {
   }, []);
 
   return (
-    <Body id="main">
+    <Body id="main" img={backgroundImg} header={headerImg}>
       <Header />
       <Player tracks={data.tracks} />
       <Footer>v0.1.3</Footer>
@@ -89,6 +97,27 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media only screen and (orientation: portrait) {
+    ${props => props.img && props.header &&
+      `background: 
+        url(${props.header}) 47% 75% no-repeat,
+        url(${props.img}) black center no-repeat;
+      `
+    }
+    ${props => props.img && `background-size: 650px`}
+  }
+
+
+  @media (min-width: 800px) {
+    ${props => props.img && props.header &&
+      `background: 
+        url(${props.header}) 50% 75% no-repeat,
+        url(${props.img}) black center no-repeat;
+      `
+    }
+    ${props => props.img && `background-size: 650px`}
+  }
 `;
 
 const Footer = styled.div`

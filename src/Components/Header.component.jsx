@@ -16,7 +16,7 @@ const Letter = styled.div`
   color: black;
   font-size: 1.7rem;
   font-weight: 800;
-  background-color: #f7f5f7
+  background-color: #f7f5f7;
 `;
 
 const RadioBox = styled.div`

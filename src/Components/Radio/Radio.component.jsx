@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
+
+// components
 import Cassette from '../Cassette/Cassette.component';
+
+// libraries
 import styled from 'styled-components';
 import { motion } from "framer-motion"
 import { GiPlayButton, GiPauseButton } from 'react-icons/gi';
@@ -299,15 +303,15 @@ const Eject = styled.button`
   width: 8rem;
 `;
 
-const EjectActive = styled(Eject)`
-  background-color: #19A2B8;
-  color: white;
-`;
+// const EjectActive = styled(Eject)`
+//   background-color: #19A2B8;
+//   color: white;
+// `;
 
-const EjectInactive = styled(Eject)`
-  background-color: white;
-  color: black;
-`;
+// const EjectInactive = styled(Eject)`
+//   background-color: white;
+//   color: black;
+// `;
 
 const EJECT_GOTH = styled(Eject)`
   border-bottom: outset .3rem black;
