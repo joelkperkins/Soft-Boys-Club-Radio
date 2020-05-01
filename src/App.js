@@ -4,24 +4,13 @@ import Player from './Components/Player/Player.component';
 import Header from './Components/Header.component';
 import styled from 'styled-components'
 
-const Body = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: black;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 const siteUrl = 'https://icecast.softboys.club:18000';
+
 const ssl = (listenurl) => {
   let trackpath = !listenurl ? null : listenurl.slice(listenurl.lastIndexOf('/'));
   return siteUrl + trackpath;
 };
+
 const getTracks = (source) => {
   // zero sources
   if (!source) {
@@ -58,13 +47,7 @@ const getTracks = (source) => {
     )
   } 
 };
-const Footer = styled.div`
-  position: fixed;
-  bottom: .5rem;
-  left: 1rem;
-  font-family: 'Arima Madurai', cursive;
-  color: gray;
-`
+
 
 const App = () => {
   const [data, setData] = useState({tracks: []});
@@ -94,5 +77,26 @@ const App = () => {
     </Body>
   );
 }
+
+const Body = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Footer = styled.div`
+  position: fixed;
+  bottom: .5rem;
+  left: 1rem;
+  font-family: 'Arima Madurai', cursive;
+  color: gray;
+`
 
 export default App;
