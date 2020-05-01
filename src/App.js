@@ -12,11 +12,9 @@ import styled from 'styled-components'
 import backgroundImg from './Images/elen.jpg'
 import headerImg from './Images/techno.png'
 
-const siteUrl = 'https://icecast.softboys.club:18000';
-
-const ssl = (listenurl) => {
-  let trackpath = !listenurl ? null : listenurl.slice(listenurl.lastIndexOf('/'));
-  return siteUrl + trackpath;
+const sslUrl = (trackUrl) => {
+  let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
+  return process.env.REACT_APP_ICECAST_URL + keyUrl;
 };
 
 const getTracks = (source) => {
@@ -31,7 +29,7 @@ const getTracks = (source) => {
       id: 'track0',
       genre: source.genre || null,
       title: source.title || '<no track data>',
-      url: ssl(source.listenurl),
+      url: sslUrl(source.listenurl),
       date: source.stream_start || null,
       station: source.server_name || null,
       desc: source.server_description || null,
@@ -45,7 +43,7 @@ const getTracks = (source) => {
       id: 'track' + i,
       genre: s.genre || null,
       title: s.title || '<no track data>',
-      url: ssl(s.listenurl),
+      url: sslUrl(s.listenurl),
       date: s.stream_start || null,
       station: s.server_name || null,
       desc: s.server_description || null,
@@ -59,12 +57,11 @@ const getTracks = (source) => {
 
 const App = () => {
   const [data, setData] = useState({tracks: []});
-
   useEffect(() => {
     const fetchData = async () => {
 
       const result = await axios.get(
-        siteUrl + "/status-json.xsl"
+        process.env.REACT_APP_ICECAST_URL + "/status-json.xsl"
       );
 
       const response = {
