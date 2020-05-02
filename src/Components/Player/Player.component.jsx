@@ -32,9 +32,7 @@ const Player = ({ tracks }) => {
       <Bottom>
         <Radio activeTrack={activeTrack} setActiveTrack={(e) => setActiveTrack(e)}/>
       </Bottom>
-      <Top>
-        {Cassettes}
-      </Top>
+      {Cassettes}
     </motion.div>
   )
 };
@@ -49,7 +47,6 @@ const Row = styled.div`
   align-items: center;
   padding: 1rem;
   overflow: none;
-  margin-bottom: 2rem;
 
   :focus {
     z-index: 3;
@@ -63,19 +60,6 @@ const Bottom = styled.div`
   bottom: 0;
   left: 0;
   width: 98%;
-  z-index: 1;
-`
-
-const Top = styled.div`
-  padding-top: 5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 `
 
 export default Player;
