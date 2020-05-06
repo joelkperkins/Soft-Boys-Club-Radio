@@ -9,6 +9,7 @@ import { motion } from "framer-motion"
 import { GiPlayButton, GiPauseButton } from 'react-icons/gi';
 import { MdEject } from 'react-icons/md';
 import axios from 'axios';
+import './Radio.css';
 
 const Radio = ({activeTrack, setActiveTrack}) => {
   const [status, setStatus] = useState('EMPTY');
