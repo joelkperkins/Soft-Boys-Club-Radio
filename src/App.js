@@ -9,8 +9,8 @@ import axios from 'axios';
 import styled from 'styled-components'
 
 // resouces
-import backgroundImg from './Images/elen.jpg'
-import headerImg from './Images/techno.png'
+import backgroundImg from './Images/feature.jpg'
+import headerImg from './Images/text.png'
 
 const sslUrl = (trackUrl) => {
   let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));

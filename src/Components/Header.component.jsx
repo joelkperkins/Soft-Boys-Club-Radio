@@ -2,6 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 import { MdMoreHoriz } from 'react-icons/md'
 
+const Header = () => {
+  return (
+    <Banner>
+      <Letter>S</Letter>
+      <Letter>O</Letter>
+      <Letter>F</Letter>
+      <Letter>T</Letter>
+      <MdMoreHoriz color="white" size=".2em" />
+      <Letter>B</Letter>
+      <Letter>O</Letter>
+      <Letter>Y</Letter>
+      <Letter>S</Letter>
+      <MdMoreHoriz color="white" size=".2em" />
+      <Letter>C</Letter>
+      <Letter>L</Letter>
+      <Letter>U</Letter>
+      <Letter>B</Letter>
+      <RadioBox href="https://roico.zoom.us/j/95030460117" target="_blank">
+        <Radio>RADIO</Radio>
+      </RadioBox>
+    </Banner>
+  )
+};
+
+
 const Banner = styled.div`
   width: 100%;
   display: flex;
@@ -19,17 +44,21 @@ const Letter = styled.div`
   background-color: #f7f5f7;
 `;
 
-const RadioBox = styled.div`
+const RadioBox = styled.a`
 @media only screen and (orientation: portrait) {
     transform: rotate(-5deg);
     width: 20%;
-    height: 100%;
+    height: 3rem;
     background-color: black;
     display: flex;
     align-items: center;
     justify-content: center;
     border: .1rem solid pink;
     border-radius: .5rem;
+    position: absolute;
+    right: 0;
+    top: 2rem;
+    z-index: 3;
   }
   @media (min-width: 800px) {
     border-radius: .5rem;
@@ -54,30 +83,5 @@ const Radio = styled.div`
     font-size: 3rem;
   }
 `;
-
-
-const Header = () => {
-  return (
-    <Banner>
-      <Letter>S</Letter>
-      <Letter>O</Letter>
-      <Letter>F</Letter>
-      <Letter>T</Letter>
-      <MdMoreHoriz color="white" size=".2em" />
-      <Letter>B</Letter>
-      <Letter>O</Letter>
-      <Letter>Y</Letter>
-      <Letter>S</Letter>
-      <MdMoreHoriz color="white" size=".2em" />
-      <Letter>C</Letter>
-      <Letter>L</Letter>
-      <Letter>U</Letter>
-      <Letter>B</Letter>
-      <RadioBox>
-        <Radio>RADIO</Radio>
-      </RadioBox>
-    </Banner>
-  )
-};
 
 export default Header;

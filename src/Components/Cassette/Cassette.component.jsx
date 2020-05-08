@@ -99,9 +99,9 @@ const Title = styled.div`
 `;
 
 const THEME_TITLE = styled(Title)`
-  background: black;
-  border: solid .1rem limegreen;
-  color: hotpink;
+  background: #F3F6F9;
+  border: solid .1rem #F3F6F9;
+  color: #FFE186;
 `
 
 const CassetteOpen = styled.div`
@@ -123,8 +123,8 @@ const CassetteOpen = styled.div`
 `;
 
 const THEME_CASSETTE_OPEN = styled(CassetteOpen)`
-  background: black;
-  border: double .3rem limegreen;
+  background: white;
+  border: double .3rem #F3F6F9;
 `
 
 const CassetteClosed = styled.div`
@@ -147,8 +147,8 @@ const CassetteClosed = styled.div`
 `;
 
 const THEME_CASSETTE_CLOSED = styled(CassetteClosed)`
-  background: black;
-  border: double .3rem limegreen;
+  background: white;
+  border: double .3rem #F3F6F9;
 `
 
 const CassetteBottom = styled.div`
@@ -164,9 +164,9 @@ const CassetteBottom = styled.div`
 `;
 
 const THEME_CASSETTE_BOTTOM = styled(CassetteBottom)`
-  background: black;
-  border: solid .1rem limegreen;
-  color: hotpink;
+  background: #F3F6F9;
+  border: solid .1rem #F3F6F9;
+  color: #FFE186;
 `
 
 const Holes = styled.div`
@@ -182,13 +182,13 @@ const Holes = styled.div`
 const Hole = styled.div`
   width: 2rem;
   height: 2rem;
-  background: black;
+  background: transparent;
   border-radius: 50%;
   border: dashed .3rem white;
 `;
 
 const THEME_HOLE = styled(Hole)`
-  border: dashed .3rem hotpink;
+  border: dashed .3rem transparent;
 `
 
 export default Cassette;
