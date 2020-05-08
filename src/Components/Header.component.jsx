@@ -64,12 +64,16 @@ const RadioBox = styled.a`
     border-radius: .5rem;
     transform: rotate(-4deg);
     width: 20%;
-    height: 100%;
+    height: 4rem;
     background-color: black;
     display: flex;
     align-items: center;
     justify-content: center;
     border: .3rem solid pink;
+    position: absolute;
+    right: 0;
+    top: 2rem;
+    z-index: 3;
   }
 `;
 
