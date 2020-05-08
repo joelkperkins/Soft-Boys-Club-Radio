@@ -29,7 +29,7 @@ const Radio = ({activeTrack, setActiveTrack}) => {
   }, [activeTrack])
 
   const statusBank = {
-    EMPTY: 'Please Insert a Cassette!',
+    EMPTY: 'Please Rack a Line!',
     PLAYING: `Now Playing: ${nowPlaying}`,
     LOADED: `Press Play?`
   }
@@ -134,8 +134,8 @@ const RadioMain = styled.div`
 `;
 
 const THEME_RADIO_MAIN_GOTH = styled(RadioMain)`
-  background: black;
-  border: outset .4rem limegreen;
+  background: #E0B650;
+  border: outset .4rem #FFE186;
 `;
 
 const RadioInsert = styled.div`
@@ -149,7 +149,7 @@ const RadioInsert = styled.div`
 `;
 
 const THEME_RADIO_INSERT_GOTH = styled(RadioInsert)`
-  background: black;
+  background: #DEC38C;
 `
 
 const Screen = styled.div`
@@ -167,8 +167,8 @@ const Screen = styled.div`
 `;
 
 const THEME_SCREEN_GOTH = styled(Screen)`
-  background: hotpink;
-  color: white;
+  background: #1CB676;
+  color: black;
 `
 
 const Insert = styled.div`
@@ -185,9 +185,9 @@ const Insert = styled.div`
 `;
 
 const THEME_INSERT_GOTH = styled(Insert)`
-  border-left: inset .5rem limegreen;
-  border-bottom: inset .5rem limegreen;
-  color: limegreen;
+  border-left: inset .5rem #FFE186;
+  border-bottom: inset .5rem #FFE186;
+  color: white;
 `
 
 const RadioButtons = styled.div`
@@ -207,8 +207,8 @@ const RadioBody = styled.div`
 `;
 
 const THEME_BODY_GOTH = styled(RadioBody)`
-  background: black;
-  border: outset .3rem limegreen;
+  background: #E0B650;
+  border: outset .3rem #FFE186;
 `
 
 const Play = styled.button`
@@ -226,19 +226,19 @@ const Play = styled.button`
 
 
 const Play_GOTH = styled(Play)`
-  border-bottom: outset .3rem black;
-  border-right: outset .3rem black;
-  background-color: black;
+  border-bottom: outset .3rem #C1C0C6;
+  border-right: outset .3rem #C1C0C6;
+  background-color: white;
 `
 
 const PLAY_ACTIVE_GOTH = styled(Play_GOTH)`
-  background-color: black;
-  color: hotpink;
+  background-color: white;
+  color: #1CB676;
 `
 
 const PLAY_INACTIVE_GOTH = styled(Play_GOTH)`
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
 `
 
 // const PlayActive = styled(Play)`
@@ -265,19 +265,19 @@ const Pause = styled.button`
 `;
 
 const PAUSE_GOTH = styled(Pause)`
-  border-bottom: outset .3rem black;
-  border-right: outset .3rem black;
-  background-color: black;
+  border-bottom: outset .3rem #C1C0C6;
+  border-right: outset .3rem #C1C0C6;
+  background-color: white;
 `
 
 const PAUSE_ACTIVE_GOTH = styled(PAUSE_GOTH)`
-  background-color: black;
-  color: hotpink;
+  background-color: white;
+  color: #1CB676;
 `
 
 const PAUSE_INACTIVE_GOTH = styled(PAUSE_GOTH)`
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
 `
 
 // const PauseActive = styled(Pause)`
@@ -314,19 +314,19 @@ const Eject = styled.button`
 // `;
 
 const EJECT_GOTH = styled(Eject)`
-  border-bottom: outset .3rem black;
-  border-right: outset .3rem black;
-  background-color: black;
+  border-bottom: outset .3rem #C1C0C6;
+  border-right: outset .3rem #C1C0C6;
+  background-color: white;
 `
 
 const EJECT_ACTIVE_GOTH = styled(EJECT_GOTH)`
-  background-color: black;
-  color: hotpink;
+  background-color: white;
+  color: #1CB676;
 `
 
 const EJECT_INACTIVE_GOTH = styled(EJECT_GOTH)`
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
 `
 
 export default Radio;
