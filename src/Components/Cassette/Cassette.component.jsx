@@ -65,21 +65,21 @@ const Cassette = ({activeTrack, track, index, constraintsRef, reduced, setActive
 
   if (reduced) {
     return (
-      <THEME_CASSETTE_CLOSED >
-        <THEME_TITLE>{track.station}</THEME_TITLE>
-      </THEME_CASSETTE_CLOSED > 
+      <CassetteClosed >
+        <Title>{track.station}</Title>
+      </CassetteClosed > 
     )
   } else if (activeTrack === null || activeTrack.station !== track.station) {
     return (
       <motion.div id={`track-key-${index}`} drag style={{ x, y }} dragConstraints={constraintsRef} >
-        <THEME_CASSETTE_OPEN>
-        <THEME_TITLE>{track.station}</ THEME_TITLE>
+        <CassetteOpen>
+        <Title>{track.station}</ Title>
           <Holes>
-              <THEME_HOLE ></THEME_HOLE >
-              <THEME_HOLE ></THEME_HOLE >
+              <Hole ></Hole >
+              <Hole ></Hole >
           </Holes>
-          <THEME_CASSETTE_BOTTOM>{track.genre}</THEME_CASSETTE_BOTTOM>
-        </THEME_CASSETTE_OPEN>
+          <CassetteClosed>{track.genre}</CassetteClosed>
+        </CassetteOpen>
       </motion.div>
     );
   }
@@ -98,11 +98,11 @@ const Title = styled.div`
   background: #fffd82;
 `;
 
-const THEME_TITLE = styled(Title)`
-  background: #F3F6F9;
-  border: solid .1rem #F3F6F9;
-  color: #FFE186;
-`
+// const THEME_TITLE = styled(Title)`
+//   background: #F3F6F9;
+//   border: solid .1rem #F3F6F9;
+//   color: #FFE186;
+// `
 
 const CassetteOpen = styled.div`
   position: relative;
@@ -122,10 +122,10 @@ const CassetteOpen = styled.div`
   background: #ee4266;
 `;
 
-const THEME_CASSETTE_OPEN = styled(CassetteOpen)`
-  background: white;
-  border: double .3rem #F3F6F9;
-`
+// const THEME_CASSETTE_OPEN = styled(CassetteOpen)`
+//   background: white;
+//   border: double .3rem #F3F6F9;
+// `
 
 const CassetteClosed = styled.div`
   padding-top: .25rem;
@@ -146,10 +146,10 @@ const CassetteClosed = styled.div`
   background: #ee4266;
 `;
 
-const THEME_CASSETTE_CLOSED = styled(CassetteClosed)`
-  background: white;
-  border: double .3rem #F3F6F9;
-`
+// const THEME_CASSETTE_CLOSED = styled(CassetteClosed)`
+//   background: white;
+//   border: double .3rem #F3F6F9;
+// `
 
 const CassetteBottom = styled.div`
   font-family: 'Rock Salt', cursive;
@@ -163,11 +163,11 @@ const CassetteBottom = styled.div`
   background: #fffd82;
 `;
 
-const THEME_CASSETTE_BOTTOM = styled(CassetteBottom)`
-  background: #F3F6F9;
-  border: solid .1rem #F3F6F9;
-  color: #FFE186;
-`
+// const THEME_CASSETTE_BOTTOM = styled(CassetteBottom)`
+//   background: #F3F6F9;
+//   border: solid .1rem #F3F6F9;
+//   color: #FFE186;
+// `
 
 const Holes = styled.div`
   display: flex;
@@ -187,9 +187,9 @@ const Hole = styled.div`
   border: dashed .3rem white;
 `;
 
-const THEME_HOLE = styled(Hole)`
-  border: dashed .3rem transparent;
-`
+// const THEME_HOLE = styled(Hole)`
+//   border: dashed .3rem transparent;
+// `
 
 export default Cassette;
 
