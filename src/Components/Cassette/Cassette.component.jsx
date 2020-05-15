@@ -66,7 +66,7 @@ const Cassette = ({activeTrack, track, index, constraintsRef, reduced, setActive
   if (reduced) {
     return (
       <CassetteClosed>
-        <Title>{track.station}</Title>
+        <Title>{track.title}</Title>
       </CassetteClosed> 
     )
   } else if (activeTrack === null || activeTrack.station !== track.station) {
@@ -163,11 +163,11 @@ const CassetteBottom = styled.div`
   background: #fffd82;
 `;
 
-const THEME_CASSETTE_BOTTOM = styled(CassetteBottom)`
-  background: #F3F6F9;
-  border: solid .1rem #F3F6F9;
-  color: #FFE186;
-`
+// const THEME_CASSETTE_BOTTOM = styled(CassetteBottom)`
+//   background: #F3F6F9;
+//   border: solid .1rem #F3F6F9;
+//   color: #FFE186;
+// `
 
 const Holes = styled.div`
   display: flex;
@@ -187,9 +187,9 @@ const Hole = styled.div`
   border: dashed .3rem white;
 `;
 
-const THEME_HOLE = styled(Hole)`
-  border: dashed .3rem transparent;
-`
+// const THEME_HOLE = styled(Hole)`
+//   border: dashed .3rem transparent;
+// `
 
 export default Cassette;
 
