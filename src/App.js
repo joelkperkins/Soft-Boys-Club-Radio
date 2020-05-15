@@ -18,6 +18,26 @@ const sslUrl = (trackUrl) => {
 };
 
 const getTracks = (source) => {
+  const onetape = true;
+  if (onetape === true ) {
+    return source.reduce((acc, curr, index) => {
+      if (curr.title === 'Doomtown') {
+        acc.push({
+          id: 'track' + index,
+          genre: curr.genre || null,
+          title: curr.title || '<no track data>',
+          url: sslUrl(curr.listenurl),
+          date: curr.stream_start || null,
+          station: curr.server_name || null,
+          desc: curr.server_description || null,
+          heardBy: curr.listener_peak || null,
+          type: curr.server_type || null
+          });
+      }
+      return acc;
+    }, []);
+  }
+
   // zero sources
   if (!source) {
     return [];
@@ -39,21 +59,18 @@ const getTracks = (source) => {
 
   //array of sources
   } else {
-    return source.filter((s, i) => {
-      if (s.title === 'Doomtown') {
-        return {
-          id: 'track' + i,
-          genre: s.genre || null,
-          title: s.title || '<no track data>',
-          url: sslUrl(s.listenurl),
-          date: s.stream_start || null,
-          station: s.server_name || null,
-          desc: s.server_description || null,
-          heardBy: s.listener_peak || null,
-          type: s.server_type || null
-        }
-      }
-    });
+    return source.map((s, i) => ({
+      id: 'track' + i,
+      genre: s.genre || null,
+      title: s.title || '<no track data>',
+      url: sslUrl(s.listenurl),
+      date: s.stream_start || null,
+      station: s.server_name || null,
+      desc: s.server_description || null,
+      heardBy: s.listener_peak || null,
+      type: s.server_type || null
+      })
+    )
   } 
 };
 
@@ -107,6 +124,7 @@ const Body = styled.div`
   @media only screen and (orientation: portrait) {
     ${props => props.img && props.header &&
       `background: 
+        url(${props.header}) 47% 75% no-repeat,
         url(${props.img}) black center no-repeat;
       `
     }
@@ -117,6 +135,7 @@ const Body = styled.div`
   @media (min-width: 800px) {
     ${props => props.img && props.header &&
       `background:
+        url(${props.header}) 50% 75% no-repeat,
         url(${props.img}) black center no-repeat;
       `
     }
