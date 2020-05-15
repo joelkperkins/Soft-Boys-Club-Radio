@@ -65,15 +65,15 @@ const Cassette = ({activeTrack, track, index, constraintsRef, reduced, setActive
 
   if (reduced) {
     return (
-      <CassetteClosed >
-        <Title>{track.station}</Title>
-      </CassetteClosed > 
+      <CassetteClosed>
+        <Title>{track.title}</Title>
+      </CassetteClosed> 
     )
   } else if (activeTrack === null || activeTrack.station !== track.station) {
     return (
       <motion.div id={`track-key-${index}`} drag style={{ x, y }} dragConstraints={constraintsRef} >
         <CassetteOpen>
-        <Title>{track.station}</ Title>
+        <Title>{track.station || track.title}</ Title>
           <Holes>
               <Hole ></Hole >
               <Hole ></Hole >
@@ -182,7 +182,7 @@ const Holes = styled.div`
 const Hole = styled.div`
   width: 2rem;
   height: 2rem;
-  background: transparent;
+  background: black;
   border-radius: 50%;
   border: dashed .3rem white;
 `;
