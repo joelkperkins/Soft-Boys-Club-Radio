@@ -125,7 +125,6 @@ const Body = styled.div`
   @media only screen and (orientation: portrait) {
     ${props => props.img && props.header &&
       `background: 
-        url(${props.header}) 47% 75% no-repeat,
         url(${props.img}) black center no-repeat;
       `
     }
@@ -136,7 +135,6 @@ const Body = styled.div`
   @media (min-width: 800px) {
     ${props => props.img && props.header &&
       `background:
-        url(${props.header}) 50% 75% no-repeat,
         url(${props.img}) black center no-repeat;
       `
     }
