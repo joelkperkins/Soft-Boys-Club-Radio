@@ -18,27 +18,6 @@ const sslUrl = (trackUrl) => {
 };
 
 const getTracks = (source) => {
-  //implement in the future
-  const onetape = false;
-  if (onetape === true ) {
-    return source.reduce((acc, curr, index) => {
-      if (curr.title === 'Doomtown') {
-        acc.push({
-          id: 'track' + index,
-          genre: curr.genre || null,
-          title: curr.title || '<no track data>',
-          url: sslUrl(curr.listenurl),
-          date: curr.stream_start || null,
-          station: curr.server_name || null,
-          desc: curr.server_description || null,
-          heardBy: curr.listener_peak || null,
-          type: curr.server_type || null
-          });
-      }
-      return acc;
-    }, []);
-  }
-
   // zero sources
   if (!source) {
     return [];

@@ -73,7 +73,7 @@ const Cassette = ({activeTrack, track, index, constraintsRef, reduced, setActive
     return (
       <motion.div id={`track-key-${index}`} drag style={{ x, y }} dragConstraints={constraintsRef} >
         <CassetteOpen>
-        <Title>{track.station || track.title}</ Title>
+        <Title>{track.title}</ Title>
           <Holes>
               <Hole ></Hole >
               <Hole ></Hole >
