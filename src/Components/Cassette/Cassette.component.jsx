@@ -78,7 +78,7 @@ const Cassette = ({activeTrack, track, index, constraintsRef, reduced, setActive
               <Hole ></Hole >
               <Hole ></Hole >
           </Holes>
-          <CassetteClosed>{track.genre}</CassetteClosed>
+          <CassetteBottom>{track.genre}</CassetteBottom>
         </CassetteOpen>
       </motion.div>
     );
