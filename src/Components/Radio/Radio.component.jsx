@@ -110,7 +110,7 @@ const Radio = ({activeTrack, setActiveTrack}) => {
       </RadioButtons>
       <THEME_RADIO_MAIN_GOTH id="radio-insert">
         <THEME_RADIO_INSERT_GOTH id="insert-here">
-        <THEME_SCREEN_GOTH>{statusBank[status]}</THEME_SCREEN_GOTH>
+          <THEME_SCREEN_GOTH>{statusBank[status]}</THEME_SCREEN_GOTH>
           {activeTrack ? <Cassette track={activeTrack} reduced={true} /> : <THEME_INSERT_GOTH>------------------------------------</THEME_INSERT_GOTH>}
         </THEME_RADIO_INSERT_GOTH>
       </THEME_RADIO_MAIN_GOTH>

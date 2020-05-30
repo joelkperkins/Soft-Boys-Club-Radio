@@ -66,7 +66,7 @@ const Cassette = ({activeTrack, track, index, constraintsRef, reduced, setActive
   if (reduced) {
     return (
       <CassetteClosed>
-        <Title>{track.title}</Title>
+        <Title>{track.genre}</Title>
       </CassetteClosed> 
     )
   } else if (activeTrack === null || activeTrack.station !== track.station) {
