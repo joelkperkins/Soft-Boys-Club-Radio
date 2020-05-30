@@ -9,8 +9,12 @@ import axios from 'axios';
 import styled from 'styled-components'
 
 // resouces
-import backgroundImg from './Images/feature.png'
 import headerImg from './Images/text.png'
+
+const imgUrl = () => {
+  let keyUrl = process.env.REACT_APP_ICECAST_URL + "/static/feature.jpg";
+  return keyUrl;
+}
 
 const sslUrl = (trackUrl) => {
   let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
@@ -102,7 +106,7 @@ const App = () => {
   }, []);
 
   return (
-    <Body id="main" height={height} img={backgroundImg} header={headerImg}>
+    <Body id="main" height={height} img={imgUrl()} header={headerImg}>
       <Header />
       <Player tracks={data.tracks} />
       <Footer>v0.1.3</Footer>
