@@ -43,6 +43,7 @@ const Row = styled.div`
   position: relative;
   z-index: 2;
   width: 15rem;
+  margin: 0 auto;
   height: 10rem;
   display: flex;
   justify-content: center;
