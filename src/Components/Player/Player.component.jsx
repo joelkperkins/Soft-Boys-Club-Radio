@@ -42,7 +42,7 @@ const Player = ({ tracks }) => {
 const Row = styled.div`
   position: relative;
   z-index: 2;
-  width: 100%;
+  width: 15rem;
   height: 10rem;
   display: flex;
   justify-content: center;
