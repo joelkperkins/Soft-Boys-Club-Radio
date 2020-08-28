@@ -45,7 +45,7 @@ const DonationTracker = () => {
           </Col>
         </DonationBox>
       </Row>
-      <DonateButton onClick={() => openInNewTab('https://www.beam.community/')}>
+      <DonateButton onClick={() => openInNewTab(process.env.REACT_APP_DONATE_LINK)}>
         <FaHandHoldingHeart size="1em" color='#F0B466' style={{marginRight: '.5rem'}}/>
         <DonateText>Donate Here</DonateText>
         <FaHandHoldingHeart size="1em" color='#518FC0' style={{marginLeft: '.5rem'}}/></DonateButton>
