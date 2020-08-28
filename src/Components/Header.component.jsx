@@ -88,38 +88,4 @@ const Radio = styled.div`
   }
 `;
 
-const DonationBox = styled.div`
-  width: 80%;
-  background-color: #FCB142;
-`
-
-const Logo = styled.img`
-  width: 5rem;
-`
-
-const Col = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const Row = styled.div`
-  display: flex;
-`
-
-const Text = styled.div`
-  font-family: 'Arima Madurai', cursive;
-  color: black;
-  font-size: 1rem;
-  font-weight: 800;
-  background-color: #f7f5f7;
-`
-
-const DollarAmount = styled.div`
-  font-family: 'Arima Madurai', cursive;
-  color: black;
-  font-size: 2rem;
-  font-weight: 800;
-  background-color: #f7f5f7;
-`
-
 export default Header;

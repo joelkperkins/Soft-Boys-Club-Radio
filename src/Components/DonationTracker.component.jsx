@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { FaHandHoldingHeart } from 'react-icons/fa';
 
 
-const DonationTracker = ({}) => {
+const DonationTracker = () => {
 
   const [totalDonationAmount, setTotalDonationAmount] = useState(null);
   const intervalRef = useRef(null)
