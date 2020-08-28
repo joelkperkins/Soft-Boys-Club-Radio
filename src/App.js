@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 // components
 import Player from './Components/Player/Player.component';
 import Header from './Components/Header.component';
+import DonationTracker from './Components/DonationTracker.component';
 
 // libraires
 import axios from 'axios';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { AiFillGithub } from 'react-icons/ai';
 
 // resouces
 import headerImg from './Images/text.png'
@@ -99,13 +101,14 @@ const App = () => {
       const result = await axios.get(
         process.env.REACT_APP_ICECAST_URL + "/status-json.xsl"
       );
-
-      const response = {
-        adminEmail: result.data.icestats.admin,
-        tracks: getTracks(result.data.icestats.source)
+      if (result.data) {
+        const response = {
+          adminEmail: result.data.icestats.admin,
+          tracks: getTracks(result.data.icestats.source)
+        }
+  
+        setData(response);
       }
-
-      setData(response);
     };
     fetchData();
   }, []);
@@ -115,26 +118,33 @@ const App = () => {
     setHeight(`${vh}px`);
   }, []);
 
+  const openInNewTab = url => {
+    var win = window.open(url, '_blank');
+    win.focus();
+  }
+
   /* 1 or 2 posters in the background */
   if (process.env.REACT_APP_SPLIT_IMG) {
     return (
       <Body id="main" height={height} header={headerImg} >
 	<Header />
+        <DonationTracker />
       	<Background>
 	  <img id="background" src={splitImgUrl1()} alt="gig poster"/>
 	  <img id="background" src={splitImgUrl2()} alt="gig poster"/>
       	</Background>
 	<Player tracks={data.tracks} />
-	<Footer>v0.1.3</Footer>
+	<Footer onClick={() => openInNewTab('https://github.com/joelkperkins/Soft-Boys-Club-Radio')}>Wanna see how it works? <AiFillGithub size='1.3em'/> v0.1.4</Footer>
       </Body>
     );
   } else {
     return (
       <Body id="main" height={height} header={headerImg}>
 	<Header />
+        <DonationTracker />
       	<img id="background" src={imgUrl()} alt="gig poster"/>
 	<Player tracks={data.tracks} />
-	<Footer>v0.1.3</Footer>
+	<Footer onClick={() => openInNewTab('https://github.com/joelkperkins/Soft-Boys-Club-Radio')}>Wanna see how it works? <AiFillGithub size='1.3em'/> v0.1.4</Footer>
       </Body>
     );
   }
@@ -179,10 +189,18 @@ const Body = styled.div`
 
 const Footer = styled.div`
   position: fixed;
-  bottom: .5rem;
-  left: 1rem;
-  font-family: 'Arima Madurai', cursive;
+  height: 1.2rem;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  font-family: 'Courier New';
   color: gray;
+  background-color: black;
+  padding: 0 .25rem;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 `
 
 export default App;

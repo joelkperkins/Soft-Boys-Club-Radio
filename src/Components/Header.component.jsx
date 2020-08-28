@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { MdMoreHoriz } from 'react-icons/md'
 
-const Header = () => {
+const Header = ({totalDonationAmount}) => {
   return (
     <Banner>
       <Letter>S</Letter>
