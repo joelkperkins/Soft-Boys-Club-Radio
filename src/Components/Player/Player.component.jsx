@@ -61,6 +61,7 @@ const Bottom = styled.div`
   left: 0;
   width: 98%;
   z-index: ${props => props.activeTrack && '100'};
+  margin-bottom: 1.5rem;
 `
 
 const Top = styled.div`

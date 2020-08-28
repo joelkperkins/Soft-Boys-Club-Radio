@@ -7,7 +7,8 @@ import DonationTracker from './Components/DonationTracker.component';
 
 // libraires
 import axios from 'axios';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { AiFillGithub } from 'react-icons/ai';
 
 // resouces
 import headerImg from './Images/text.png'
@@ -107,12 +108,17 @@ const App = () => {
     setHeight(`${vh}px`);
   }, []);
 
+  const openInNewTab = url => {
+    var win = window.open(url, '_blank');
+    win.focus();
+  }
+
   return (
     <Body id="main" height={height} img={imgUrl()} header={headerImg}>
       <Header />
       <DonationTracker />
       <Player tracks={data.tracks} />
-      <Footer>v0.1.5</Footer>
+      <Footer onClick={() => openInNewTab('https://github.com/joelkperkins/Soft-Boys-Club-Radio')}>Wanna see how it works? <AiFillGithub size='1.3em'/> v0.1.4</Footer>
     </Body>
   );
 }
@@ -151,10 +157,18 @@ const Body = styled.div`
 
 const Footer = styled.div`
   position: fixed;
-  bottom: 0rem;
-  right: 1rem;
-  font-family: 'Arima Madurai', cursive;
+  height: 1.2rem;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  font-family: 'Courier New';
   color: gray;
+  background-color: black;
+  padding: 0 .25rem;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 `
 
 export default App;
