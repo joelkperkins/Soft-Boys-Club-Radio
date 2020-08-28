@@ -20,7 +20,7 @@ const DonationTracker = () => {
       });
     }
     getDonations();
-    intervalRef.current = setInterval(() => getDonations(), 10000)// 1 per minute
+    intervalRef.current = setInterval(() => getDonations(), 1000 * 60)// 1 per minute
 
     return () => {
       clearInterval(intervalRef.current);
