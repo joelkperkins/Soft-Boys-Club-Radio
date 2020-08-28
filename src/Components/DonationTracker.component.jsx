@@ -36,7 +36,7 @@ const DonationTracker = () => {
     <Container>
       <Row>
         <Row>
-          <Logo onClick={() => openInNewTab('https://www.beam.community/')} src='https://images.squarespace-cdn.com/content/57b7400ebe65946ef828f100/1492278744096-ANIH1CQRO3BTAHTPZZQV/BEAM_logo_transparent+%282%29.png?content-type=image%2Fpng' alt='BEAM logo' />
+          <Logo onClick={() => openInNewTab('https://www.beam.community/donation')} src='https://images.squarespace-cdn.com/content/57b7400ebe65946ef828f100/1492278744096-ANIH1CQRO3BTAHTPZZQV/BEAM_logo_transparent+%282%29.png?content-type=image%2Fpng' alt='BEAM logo' />
         </Row>
         <DonationBox>
           <Col>
