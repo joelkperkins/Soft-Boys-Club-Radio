@@ -15,6 +15,16 @@ const imgUrl = () => {
   let keyUrl = process.env.REACT_APP_ICECAST_URL + "/static/feature.jpg";
   return keyUrl;
 }
+ 
+const splitImgUrl1 = () => {
+  let tempUrl = process.env.REACT_APP_ICECAST_URL + "/static/feature1.jpg";
+  return tempUrl;
+}
+
+const splitImgUrl2 = () => {
+  let tempUrl = process.env.REACT_APP_ICECAST_URL + "/static/feature2.jpg";
+  return tempUrl;
+}
 
 const sslUrl = (trackUrl) => {
   let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
@@ -105,14 +115,34 @@ const App = () => {
     setHeight(`${vh}px`);
   }, []);
 
-  return (
-    <Body id="main" height={height} img={imgUrl()} header={headerImg}>
-      <Header />
-      <Player tracks={data.tracks} />
-      <Footer>v0.1.3</Footer>
-    </Body>
-  );
+  /* 1 or 2 posters in the background */
+  if (process.env.REACT_APP_SPLIT_IMG) {
+    return (
+      <Body id="main" height={height} header={headerImg} >
+	<Header />
+      	<Background>
+	  <img id="background" src={splitImgUrl1()} alt="gig poster"/>
+	  <img id="background" src={splitImgUrl2()} alt="gig poster"/>
+      	</Background>
+	<Player tracks={data.tracks} />
+	<Footer>v0.1.3</Footer>
+      </Body>
+    );
+  } else {
+    return (
+      <Body id="main" height={height} header={headerImg}>
+	<Header />
+      	<img id="background" src={imgUrl()} alt="gig poster"/>
+	<Player tracks={data.tracks} />
+	<Footer>v0.1.3</Footer>
+      </Body>
+    );
+  }
 }
+
+const Background = styled.div`
+  position: absolute;
+`;
 
 const Body = styled.div`
   position: fixed;
@@ -125,6 +155,7 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   @media only screen and (orientation: portrait) {
     ${props => props.img && props.header &&
