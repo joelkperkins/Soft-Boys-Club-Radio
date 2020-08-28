@@ -29,7 +29,7 @@ const Radio = ({activeTrack, setActiveTrack}) => {
   }, [activeTrack])
 
   const statusBank = {
-    EMPTY: 'Please Rack a Line!',
+    EMPTY: 'Please insert a tape!',
     PLAYING: `Now Playing: ${nowPlaying}`,
     LOADED: `Press Play?`
   }

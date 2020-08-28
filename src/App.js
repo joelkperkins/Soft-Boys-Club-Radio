@@ -123,35 +123,50 @@ const App = () => {
     win.focus();
   }
 
-  /* 1 or 2 posters in the background */
-  if (process.env.REACT_APP_SPLIT_IMG) {
-    return (
-      <Body id="main" height={height} header={headerImg} >
-	<Header />
-        <DonationTracker />
-      	<Background>
-	  <img id="background" src={splitImgUrl1()} alt="gig poster"/>
-	  <img id="background" src={splitImgUrl2()} alt="gig poster"/>
-      	</Background>
-	<Player tracks={data.tracks} />
-	<Footer onClick={() => openInNewTab('https://github.com/joelkperkins/Soft-Boys-Club-Radio')}>Wanna see how it works? <AiFillGithub size='1.3em'/> v0.1.4</Footer>
-      </Body>
-    );
-  } else {
-    return (
-      <Body id="main" height={height} header={headerImg}>
-	<Header />
-        <DonationTracker />
-      	<img id="background" src={imgUrl()} alt="gig poster"/>
-	<Player tracks={data.tracks} />
-	<Footer onClick={() => openInNewTab('https://github.com/joelkperkins/Soft-Boys-Club-Radio')}>Wanna see how it works? <AiFillGithub size='1.3em'/> v0.1.4</Footer>
-      </Body>
-    );
-  }
+	const SetBackground = () => {
+		console.log(process.env.REACT_APP_SPLIT_IMG);
+  	/* 1 or 2 posters in the background */
+  	if (process.env.REACT_APP_SPLIT_IMG === 0) {
+			console.log("so");
+			return (
+     		<Background>
+	  				<img id="background" src={splitImgUrl1()} alt="gig poster"/>
+	  				<img id="background" src={splitImgUrl2()} alt="gig poster"/>
+     		</Background>
+			);
+		} else {
+			console.log("what`");
+      return (
+     		<Background>
+					<img id="background" src={imgUrl()} alt="gig poster"/>
+     		</Background>
+			);
+		}
+
+	}
+
+  return (
+    <Body id="main" height={height} header={headerImg} >
+		<Header />
+    <DonationTracker />
+		{SetBackground()}
+		<Player tracks={data.tracks} />
+		<Footer onClick={() => openInNewTab(process.env.REACT_APP_GH_LINK)}>Wanna see how it works? <AiFillGithub size='1.3em'/> v0.1.4</Footer>
+    </Body>
+  );
 }
 
 const Background = styled.div`
   position: absolute;
+	display: flex;
+	top: 3rem;
+
+  @media only screen and (orientation: portrait) {
+		flex-direction: column;
+  }
+  @media (min-width: 800px) {
+		flex-direction: row;
+  }
 `;
 
 const Body = styled.div`
@@ -166,25 +181,6 @@ const Body = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  @media only screen and (orientation: portrait) {
-    ${props => props.img && props.header &&
-      `background: 
-        url(${props.img}) black center no-repeat;
-      `
-    }
-    ${props => props.img && `background-size: 650px`}
-  }
-
-
-  @media (min-width: 800px) {
-    ${props => props.img && props.header &&
-      `background:
-        url(${props.img}) black center no-repeat;
-      `
-    }
-    ${props => props.img && `background-size: 650px`}
-  }
 `;
 
 const Footer = styled.div`
