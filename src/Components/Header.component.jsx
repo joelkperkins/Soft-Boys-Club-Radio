@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { MdMoreHoriz } from 'react-icons/md'
 
-const Header = () => {
+const Header = ({totalDonationAmount}) => {
   return (
     <Banner>
       <Letter>S</Letter>
@@ -87,5 +87,39 @@ const Radio = styled.div`
     font-size: 3rem;
   }
 `;
+
+const DonationBox = styled.div`
+  width: 80%;
+  background-color: #FCB142;
+`
+
+const Logo = styled.img`
+  width: 5rem;
+`
+
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Row = styled.div`
+  display: flex;
+`
+
+const Text = styled.div`
+  font-family: 'Arima Madurai', cursive;
+  color: black;
+  font-size: 1rem;
+  font-weight: 800;
+  background-color: #f7f5f7;
+`
+
+const DollarAmount = styled.div`
+  font-family: 'Arima Madurai', cursive;
+  color: black;
+  font-size: 2rem;
+  font-weight: 800;
+  background-color: #f7f5f7;
+`
 
 export default Header;

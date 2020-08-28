@@ -106,6 +106,7 @@ const Title = styled.div`
 
 const CassetteOpen = styled.div`
   position: relative;
+  z-index: 6;
   padding-top: .25rem;
   padding-bottom: .25rem;
   width: 15rem;

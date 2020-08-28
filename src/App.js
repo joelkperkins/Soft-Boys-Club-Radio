@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 // components
 import Player from './Components/Player/Player.component';
 import Header from './Components/Header.component';
+import DonationTracker from './Components/DonationTracker.component';
 
 // libraires
 import axios from 'axios';
@@ -89,13 +90,14 @@ const App = () => {
       const result = await axios.get(
         process.env.REACT_APP_ICECAST_URL + "/status-json.xsl"
       );
-
-      const response = {
-        adminEmail: result.data.icestats.admin,
-        tracks: getTracks(result.data.icestats.source)
+      if (result.data) {
+        const response = {
+          adminEmail: result.data.icestats.admin,
+          tracks: getTracks(result.data.icestats.source)
+        }
+  
+        setData(response);
       }
-
-      setData(response);
     };
     fetchData();
   }, []);
@@ -108,8 +110,9 @@ const App = () => {
   return (
     <Body id="main" height={height} img={imgUrl()} header={headerImg}>
       <Header />
+      <DonationTracker />
       <Player tracks={data.tracks} />
-      <Footer>v0.1.3</Footer>
+      <Footer>v0.1.5</Footer>
     </Body>
   );
 }
@@ -148,8 +151,8 @@ const Body = styled.div`
 
 const Footer = styled.div`
   position: fixed;
-  bottom: .5rem;
-  left: 1rem;
+  bottom: 0rem;
+  right: 1rem;
   font-family: 'Arima Madurai', cursive;
   color: gray;
 `
