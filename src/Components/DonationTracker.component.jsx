@@ -9,11 +9,14 @@ const DonationTracker = () => {
   const [totalDonationAmount, setTotalDonationAmount] = useState(null);
   const intervalRef = useRef(null)
 
+  window.googleDocCallback = function () { return true; };
+
   useEffect(() => {
     const getDonations = () => {
-      Axios.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vSyXqFyTBstqhqaYqa7BEcHedokQMx1QhMqjT3Wzrrc_UVulOFR_y7t269Nq3zUlj__8q2sy-dQZbWC/pub?output=csv')
+      Axios.get('https://api.apispreadsheets.com/data/1192/')
       .then(response => {
-        setTotalDonationAmount(response.data);
+        const amount = response.data.data[0].donationTotal;
+        setTotalDonationAmount(amount);
       });
     }
     getDonations();
