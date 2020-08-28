@@ -28,8 +28,8 @@ const Player = ({ tracks }) => {
   }) : [];
 
   return (
-    <motion.div className="drag-area" ref={constraintsRef}>
-      <Bottom>
+    <motion.div className="drag-area" ref={constraintsRef} sty>
+      <Bottom activeTrack={activeTrack}>
         <Radio activeTrack={activeTrack} setActiveTrack={(e) => setActiveTrack(e)}/>
       </Bottom>
       <Top>
@@ -41,7 +41,6 @@ const Player = ({ tracks }) => {
 
 const Row = styled.div`
   position: relative;
-  z-index: 2;
   width: 15rem;
   margin: 0 auto;
   height: 10rem;
@@ -51,32 +50,30 @@ const Row = styled.div`
   padding: 1rem;
   overflow: none;
   margin-bottom: 2rem;
-
-  :focus {
-    z-index: 3;
-  }
 `
 
 const Bottom = styled.div`
+  position: absolute;
   display: flex;
   justify-content: flex-end;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 98%;
-  z-index: 1;
+  z-index: ${props => props.activeTrack && '100'};
+  margin-bottom: 1.5rem;
 `
 
 const Top = styled.div`
+  position: absolute;
+  z-index: 10;
   padding-top: 5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
 `
 
 export default Player;
