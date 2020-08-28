@@ -54,7 +54,10 @@ const DonationTracker = () => {
 };
 
 const Container = styled.div`
-  width: 70%;
+  @media (min-width: 800px) {
+    width: calc(30%);
+  }
+  width: calc(70%);
   top: 3rem;
   left: .5rem;
   position: absolute;
