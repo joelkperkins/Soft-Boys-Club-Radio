@@ -19,7 +19,7 @@ const Header = ({totalDonationAmount}) => {
       <Letter>L</Letter>
       <Letter>U</Letter>
       <Letter>B</Letter>
-      <RadioBox href="https://roico.zoom.us/j/95030460117" target="_blank">
+      <RadioBox href="https://roico.zoom.us/j/95838147905?pwd=S3drbnN5eHI5aFpqc3c4RTdQeXV5dz09" target="_blank">
         <Radio>RADIO</Radio>
       </RadioBox>
     </Banner>
