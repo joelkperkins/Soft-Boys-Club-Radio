@@ -58,7 +58,7 @@ const RadioBox = styled.a`
     position: absolute;
     right: 0;
     top: 2rem;
-    z-index: 3;
+    z-index: 11;
   }
   @media (min-width: 800px) {
     border-radius: .5rem;
