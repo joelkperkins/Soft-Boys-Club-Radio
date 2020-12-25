@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 // components
 import Player from './Components/Player/Player.component';
 import Header from './Components/Header.component';
-import DonationTracker from './Components/DonationTracker.component';
 
 // libraires
 import axios from 'axios';
@@ -116,7 +115,6 @@ const App = () => {
   return (
     <Body id="main" height={height} img={imgUrl()} header={headerImg}>
       <Header />
-      <DonationTracker />
       <Player tracks={data.tracks} />
       <Footer onClick={() => openInNewTab('https://github.com/joelkperkins/Soft-Boys-Club-Radio')}>Wanna see how it works? <AiFillGithub size='1.3em'/> v0.1.4</Footer>
     </Body>
