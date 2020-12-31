@@ -82,6 +82,7 @@ const Disco = ({spinTheBall}) => {
   return (
     <Container>
       <Light id="discoBallLight"></Light>
+      <Dangle />
       <DiscoBall id="ball" spinTheBall={spinTheBall}>
         <DiscoBallMiddle spinTheBall={spinTheBall} />
       </DiscoBall>
@@ -105,8 +106,13 @@ const Light = styled.div`
   height: 100px;
   position: absolute;
   border-radius: 100%;
-  background-color: white; 
-  opacity: 0.5;
+  background-color: rgb(255, 255, 255, .5); 
+`;
+
+const Dangle = styled.div`
+  height: 100px;
+  border: 3px dotted white; 
+  transform: translate(50px, -100px);
 `;
 
 const DiscoBall = styled.div`
