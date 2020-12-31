@@ -99,8 +99,8 @@ const App = () => {
     const getStuff = async () => {
       await axios.get(process.env.REACT_APP_DB_LINK)
         .then(response => {
-          setPoster(response.data.data[2].donationTotal)
-          setZoom(response.data.data[4].donationTotal)
+          setPoster(response.data.data[0].gigPoster)
+          setZoom(response.data.data[0].zoomLink)
         })
         .catch(error => {
           console.error(error);
