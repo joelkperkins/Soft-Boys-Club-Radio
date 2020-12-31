@@ -10,7 +10,7 @@ import { GiPlayButton, GiPauseButton } from 'react-icons/gi';
 import { MdEject } from 'react-icons/md';
 import axios from 'axios';
 
-const Radio = ({activeTrack, setActiveTrack}) => {
+const Radio = ({activeTrack, setActiveTrack, setSpinTheBall}) => {
   const [status, setStatus] = useState('EMPTY');
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(false);
@@ -39,12 +39,14 @@ const Radio = ({activeTrack, setActiveTrack}) => {
       audio.play();
       setPlaying(true);
       setStatus("PLAYING");
+      setSpinTheBall()
     } else if (audio && input === 'pause') {
       audio.pause();
       setPlaying(false);
       setStatus("LOADED");
       //end the polling of new tracknames
       clearInterval(intervalRef.current);
+      setSpinTheBall();
     }
   }
 
@@ -86,26 +88,26 @@ const Radio = ({activeTrack, setActiveTrack}) => {
     <THEME_BODY_GOTH id="radio-body">
       <RadioButtons id="radio-buttons">
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} id="radio-button">
-          {activeTrack && <PLAY_ACTIVE_GOTH onClick={() => controlAudio('play')}><GiPlayButton size='2em'/></PLAY_ACTIVE_GOTH>}
-          {!activeTrack && <PLAY_INACTIVE_GOTH onClick={() => controlAudio('play')}><GiPlayButton size='2em'/></PLAY_INACTIVE_GOTH>}
+          {activeTrack && <PlayActive onClick={() => controlAudio('play')}><GiPlayButton size='2em'/></PlayActive>}
+          {!activeTrack && <PlayInactive onClick={() => controlAudio('play')}><GiPlayButton size='2em'/></PlayInactive>}
         </motion.div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} id="radio-button">
-          {activeTrack && <PAUSE_ACTIVE_GOTH  onClick={() => controlAudio('pause')}><GiPauseButton size='2em' /></PAUSE_ACTIVE_GOTH >}
-          {!activeTrack && <PAUSE_INACTIVE_GOTH onClick={() => controlAudio('pause')}><GiPauseButton size='2em' /></PAUSE_INACTIVE_GOTH>}
+          {activeTrack && <PauseActive  onClick={() => controlAudio('pause')}><GiPauseButton size='2em' /></PauseActive >}
+          {!activeTrack && <PauseInactive onClick={() => controlAudio('pause')}><GiPauseButton size='2em' /></PauseInactive>}
         </motion.div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} id="radio-button">
-          {activeTrack && <EJECT_ACTIVE_GOTH onClick={() => {
+          {activeTrack && <EjectActive onClick={() => {
             controlAudio('pause');
             setActiveTrack(null)}
           }>
             < MdEject size='2em' />
-          </EJECT_ACTIVE_GOTH>}
-          {!activeTrack && <EJECT_INACTIVE_GOTH onClick={() => {
+          </EjectActive>}
+          {!activeTrack && <EjectInactive onClick={() => {
             controlAudio('pause');
             setActiveTrack(null)}
           }>
             < MdEject size='2em' />
-          </EJECT_INACTIVE_GOTH>}
+          </EjectInactive>}
         </motion.div>
       </RadioButtons>
       <THEME_RADIO_MAIN_GOTH id="radio-insert">
@@ -225,31 +227,15 @@ const Play = styled.button`
 `;
 
 
-const Play_GOTH = styled(Play)`
-  border-bottom: outset .3rem #C1C0C6;
-  border-right: outset .3rem #C1C0C6;
-  background-color: white;
-`
+const PlayActive = styled(Play)`
+  background-color: #29A745;
+  color: #1eff4f;
+`;
 
-const PLAY_ACTIVE_GOTH = styled(Play_GOTH)`
-  background-color: white;
-  color: #1CB676;
-`
-
-const PLAY_INACTIVE_GOTH = styled(Play_GOTH)`
-  background-color: white;
+const PlayInactive = styled(Play)`
+  background-color:white;
   color: black;
-`
-
-// const PlayActive = styled(Play)`
-//   background-color: #29A745;
-//   color: #1eff4f;
-// `;
-
-// const PlayInactive = styled(Play)`
-//   background-color:white;
-//   color: black;
-// `;
+`;
 
 const Pause = styled.button`
   z-index: 1;
@@ -264,31 +250,15 @@ const Pause = styled.button`
   width: 4rem;
 `;
 
-const PAUSE_GOTH = styled(Pause)`
-  border-bottom: outset .3rem #C1C0C6;
-  border-right: outset .3rem #C1C0C6;
-  background-color: white;
-`
+const PauseActive = styled(Pause)`
+  background-color: #FFC107;
+  color: #fff600;
+`;
 
-const PAUSE_ACTIVE_GOTH = styled(PAUSE_GOTH)`
-  background-color: white;
-  color: #1CB676;
-`
-
-const PAUSE_INACTIVE_GOTH = styled(PAUSE_GOTH)`
+const PauseInactive = styled(Pause)`
   background-color: white;
   color: black;
-`
-
-// const PauseActive = styled(Pause)`
-//   background-color: #FFC107;
-//   color: #fff600;
-// `;
-
-// const PauseInactive = styled(Pause)`
-//   background-color: white;
-//   color: black;
-// `;
+`;
 
 const Eject = styled.button`
   z-index: 1;  
@@ -303,30 +273,15 @@ const Eject = styled.button`
   width: 8rem;
 `;
 
-// const EjectActive = styled(Eject)`
-//   background-color: #19A2B8;
-//   color: white;
-// `;
+const EjectActive = styled(Eject)`
+  background-color: #19A2B8;
+  color: white;
+`;
 
-// const EjectInactive = styled(Eject)`
-//   background-color: white;
-//   color: black;
-// `;
-
-const EJECT_GOTH = styled(Eject)`
-  border-bottom: outset .3rem #C1C0C6;
-  border-right: outset .3rem #C1C0C6;
-  background-color: white;
-`
-
-const EJECT_ACTIVE_GOTH = styled(EJECT_GOTH)`
-  background-color: white;
-  color: #1CB676;
-`
-
-const EJECT_INACTIVE_GOTH = styled(EJECT_GOTH)`
+const EjectInactive = styled(Eject)`
   background-color: white;
   color: black;
-`
+`;
+
 
 export default Radio;
