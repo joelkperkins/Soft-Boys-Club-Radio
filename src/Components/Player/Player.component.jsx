@@ -49,8 +49,9 @@ const Player = ({ tracks }) => {
 const Container = styled.div`
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
   background-color: ${props => props.activeTrack !== null  && 'rgb(0, 0, 0, .5)'};
   background: linear-gradient(bottom left, rgb(255, 255, 255), rgb(255, 255, 255));
