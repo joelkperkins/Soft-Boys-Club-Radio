@@ -1,9 +1,15 @@
 ## Welcome to the README
-Whoa, someone is reading the README...
+Hi, you are cool and life is pretty tight.
 
-Hi, you are cool.
+The SBC Radio was built with React! It's a webapp that hits an endpoint that serves a .ogg media stream. It serves the stream endpoint to the client when a user selects the the tape for an endpoint on a UI and presses play.
 
-- Warlock and Bird
+Our goals for the application are to:
+- add a server 
+- send notifications when an SBC DJ is live-streaming
+- Build a Genre explorer that uses Spotify to tell you what genres of music that you like. (Aaron)
+- Become a mobile app?
+
+with <3 Warlock and Bird
 
 ## link
 live @ [softboys.club](https://softboys.club)
@@ -51,4 +57,5 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 * v0.1.1 : Mobile and Desktop friendly UI render
 * v0.1.2 : add version number to UI, Deploy Beta UI to Netlify
 * v0.1.3 : Add SSL encryption to all routes, all the way home
-* v0.1.4 : Upgraded site to help benefit to someone besides ourselves
+* v0.1.4 : Used the site for a fundraiser!
+* v0.1.5 : Imagine a disco ball...

@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 // components
 import Radio from '../Radio/Radio.component';
 import Cassette from '../Cassette/Cassette.component';
+import Disco from '../Disco/Disco.component';
 
 // libraries
 import styled from 'styled-components';
@@ -12,6 +13,7 @@ import './Player.css';
 const Player = ({ tracks }) => {
   const constraintsRef = useRef(null);
   const [activeTrack, setActiveTrack] = useState(null);
+  const [spinTheBall, setSpinTheBall] = useState(false);
 
   const Cassettes = (tracks && tracks.length) ? tracks.map((track, i) => {
     if (activeTrack === null || activeTrack.station !== track.station) {
@@ -27,17 +29,32 @@ const Player = ({ tracks }) => {
     }
   }) : [];
 
+  const DiscoBall = activeTrack === null ?  null :  <Disco spinTheBall={spinTheBall} />;
+
   return (
-    <motion.div className="drag-area" ref={constraintsRef} sty>
-      <Bottom activeTrack={activeTrack}>
-        <Radio activeTrack={activeTrack} setActiveTrack={(e) => setActiveTrack(e)}/>
-      </Bottom>
-      <Top>
-        {Cassettes}
-      </Top>
-    </motion.div>
+    <Container activeTrack={activeTrack}>
+      <motion.div className="drag-area" ref={constraintsRef}>
+        <Bottom activeTrack={activeTrack}>
+          <Radio activeTrack={activeTrack} setActiveTrack={(e) => setActiveTrack(e)} setSpinTheBall={() => setSpinTheBall(!spinTheBall)} />
+        </Bottom>
+        <Top>
+          {Cassettes}
+        </Top>
+      </motion.div>
+      {DiscoBall}
+    </Container>
   )
 };
+
+const Container = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  background-color: ${props => props.activeTrack !== null  && 'rgb(0, 0, 0, .5)'};
+  background: linear-gradient(bottom left, rgb(255, 255, 255), rgb(255, 255, 255));
+`
 
 const Row = styled.div`
   position: relative;
