@@ -5,21 +5,17 @@ import './Disco.css';
 // disco sparkel
 const randomColor = (type) => {
   let r;
-  let g;
-  let b;
   
   // front side
   if(type === "bright") {
-    r = randomNumber(220, 255);
-    g = randomNumber(220, 255);
-    b = randomNumber(220, 255);
+    r = randomNumber(130, 255);
+    return "rgb(" + r + "," + r + "," + r + ")";
+    
   } else { // backside
-    r = randomNumber(200, 240);
-    g = randomNumber(200, 240);
-    b = randomNumber(200, 240);
+    r = randomNumber(130, 190);
+    return "rgb(" + r + "," + r + "," + r + ")";
+
   }
-  // generate color code
-  return "rgb(" + r + "," + g + "," + b + ")";
 }
 
 // diversify the glitter
@@ -112,7 +108,9 @@ const Light = styled.div`
 const Dangle = styled.div`
   height: 100px;
   border: 3px dotted white; 
-  transform: translate(50px, -100px);
+  transform: translate(50px, -120px);
+  animation: ${props => props.spinTheBall && 'rotateDiscoBall 18s linear infinite'};
+
 `;
 
 const DiscoBall = styled.div`
