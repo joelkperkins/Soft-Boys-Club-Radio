@@ -118,7 +118,7 @@ const App = () => {
 
   useEffect(() => {
     // do stuff with the background
-  }, dancing)
+  }, [dancing])
 
   const openInNewTab = url => {
     var win = window.open(url, '_blank');
