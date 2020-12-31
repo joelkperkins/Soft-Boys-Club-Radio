@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { MdMoreHoriz } from 'react-icons/md'
 
-const Header = ({totalDonationAmount}) => {
+const Header = ({ zoom }) => {
   return (
     <Banner>
       <Letter>S</Letter>
@@ -19,7 +19,7 @@ const Header = ({totalDonationAmount}) => {
       <Letter>L</Letter>
       <Letter>U</Letter>
       <Letter>B</Letter>
-      <RadioBox href="https://roico.zoom.us/j/95838147905?pwd=S3drbnN5eHI5aFpqc3c4RTdQeXV5dz09" target="_blank">
+      <RadioBox href={zoom} target="_blank">
         <Radio>RADIO</Radio>
       </RadioBox>
     </Banner>
