@@ -46,7 +46,9 @@ const Radio = ({activeTrack, setActiveTrack, setSpinTheBall}) => {
       setStatus("LOADED");
       //end the polling of new tracknames
       clearInterval(intervalRef.current);
-      setSpinTheBall();
+      if (playing === true) {
+        setSpinTheBall();
+      }
     }
   }
 

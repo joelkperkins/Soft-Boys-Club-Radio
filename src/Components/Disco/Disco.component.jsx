@@ -10,13 +10,13 @@ const randomColor = (type) => {
   
   // front side
   if(type === "bright") {
-    r = randomNumber(180, 255);
-    g = randomNumber(180, 255);
-    b = randomNumber(180, 255);
+    r = randomNumber(200, 255);
+    g = randomNumber(200, 255);
+    b = randomNumber(200, 255);
   } else { // backside
     r = randomNumber(160, 220);
     g = randomNumber(160, 220);
-    b = randomNumber(160, 220);
+    b = randomNumber(200, 220);
   }
   // generate color code
   return "rgb(" + r + "," + g + "," + b + ")";
@@ -30,7 +30,7 @@ const randomNumber = (min, max) => {
 const Disco = ({spinTheBall}) => {
 
   useEffect(() => {
-    const radius = 70;
+    const radius = 65;
     const squareSize = 10;
     const prec = 19.55;
     const fuzzy = .01;
@@ -81,6 +81,7 @@ const Disco = ({spinTheBall}) => {
 
   return (
     <Container>
+      <Light id="discoBallLight"></Light>
       <DiscoBall id="ball" spinTheBall={spinTheBall}>
         <DiscoBallMiddle spinTheBall={spinTheBall} />
       </DiscoBall>
@@ -99,11 +100,21 @@ const Container = styled.div`
   animation: lowerDiscoBall 4s forwards;
 `;
 
+const Light = styled.div`
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  border-radius: 100%;
+  background-color: white; 
+  opacity: 0.5;
+`;
+
 const DiscoBall = styled.div`
   transform-style: preserve-3d;
   width: 100px;
   height: 100px;
   position: relative;
+
   animation: ${props => props.spinTheBall && 'rotateDiscoBall 18s linear infinite'};
 `;
 
@@ -111,6 +122,7 @@ const DiscoBallMiddle = styled.div`
   height: 100%;
   border-radius: 100%;
   position: relative;
+  background-color: rgb(255, 255, 255, .8); 
   background: linear-gradient(top, #111, #333);
   animation: ${props => props.spinTheBall && 'rotateDiscoBall 18s linear infinite'};
 `
