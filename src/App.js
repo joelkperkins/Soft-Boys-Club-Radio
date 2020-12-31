@@ -12,12 +12,6 @@ import { AiFillGithub } from 'react-icons/ai';
 // resouces
 import headerImg from './Images/text.png'
 
-/*
-const imgUrl = () => {
-  let keyUrl = process.env.REACT_APP_ICECAST_URL + "/static/feature.jpg";
-  return keyUrl;
-}*/
-
 const sslUrl = (trackUrl) => {
   let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
   return process.env.REACT_APP_ICECAST_URL + keyUrl;
@@ -84,8 +78,8 @@ const getTracks = (source) => {
 
 const App = () => {
   const [data, setData] = useState({ tracks: [] });
-	const [poster, setPoster] = useState('');
-	const [zoom, setZoom] = useState('');
+  const [poster, setPoster] = useState('');
+  const [zoom, setZoom] = useState('');
   const [height, setHeight] = useState('100vh');
   useEffect(() => {
     const fetchData = async () => {
@@ -102,18 +96,18 @@ const App = () => {
         setData(response);
       }
     };
-		const getStuff = async () => {
-			await axios.get(process.env.REACT_APP_DB_LINK)
-				.then(response => {
-					setPoster(response.data.data[2].donationTotal)
-					setZoom(response.data.data[4].donationTotal)
-				})
-				.catch(error => {
-					console.error(error);
-				});
-		};
+    const getStuff = async () => {
+      await axios.get(process.env.REACT_APP_DB_LINK)
+        .then(response => {
+          setPoster(response.data.data[2].donationTotal)
+          setZoom(response.data.data[4].donationTotal)
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
     fetchData();
-		getStuff();
+    getStuff();
   }, []);
 
   useEffect(() => {
