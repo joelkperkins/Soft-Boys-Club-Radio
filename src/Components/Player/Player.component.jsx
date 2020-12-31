@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import { motion } from "framer-motion"
 import './Player.css';
 
-const Player = ({ tracks }) => {
+const Player = ({ tracks, setDancing }) => {
   const constraintsRef = useRef(null);
   const [activeTrack, setActiveTrack] = useState(null);
   const [spinTheBall, setSpinTheBall] = useState(false);
@@ -35,7 +35,7 @@ const Player = ({ tracks }) => {
     <Container activeTrack={activeTrack}>
       <motion.div className="drag-area" ref={constraintsRef}>
         <Bottom activeTrack={activeTrack}>
-          <Radio activeTrack={activeTrack} setActiveTrack={(e) => setActiveTrack(e)} setSpinTheBall={() => setSpinTheBall(!spinTheBall)} />
+          <Radio activeTrack={activeTrack} setActiveTrack={(e) => setActiveTrack(e)} setSpinTheBall={() => setSpinTheBall(!spinTheBall)} setDancing={() => setDancing()}/>
         </Bottom>
         <Top>
           {Cassettes}

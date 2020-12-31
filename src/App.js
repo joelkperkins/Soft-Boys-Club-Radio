@@ -81,6 +81,7 @@ const App = () => {
   const [poster, setPoster] = useState('');
   const [zoom, setZoom] = useState('');
   const [height, setHeight] = useState('100vh');
+  const [dancing, setDancing] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
 
@@ -115,6 +116,10 @@ const App = () => {
     setHeight(`${vh}px`);
   }, []);
 
+  useEffect(() => {
+    // do stuff with the background
+  }, dancing)
+
   const openInNewTab = url => {
     var win = window.open(url, '_blank');
     win.focus();
@@ -123,7 +128,7 @@ const App = () => {
   return (
     <Body id="main" height={height} img={poster} header={headerImg}>
       <Header zoom={zoom} />
-      <Player tracks={data.tracks} />
+      <Player tracks={data.tracks} setDancing={() => setDancing(!dancing)} />
       <Footer onClick={() => openInNewTab('https://github.com/joelkperkins/Soft-Boys-Club-Radio')}>Wanna see how it works? <AiFillGithub size='1.3em'/> v0.1.4</Footer>
     </Body>
   );
