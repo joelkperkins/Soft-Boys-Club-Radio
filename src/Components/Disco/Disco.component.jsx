@@ -10,13 +10,13 @@ const randomColor = (type) => {
   
   // front side
   if(type === "bright") {
-    r = randomNumber(200, 255);
-    g = randomNumber(200, 255);
-    b = randomNumber(200, 255);
+    r = randomNumber(220, 255);
+    g = randomNumber(220, 255);
+    b = randomNumber(220, 255);
   } else { // backside
-    r = randomNumber(160, 220);
-    g = randomNumber(160, 220);
-    b = randomNumber(200, 220);
+    r = randomNumber(200, 240);
+    g = randomNumber(200, 240);
+    b = randomNumber(200, 240);
   }
   // generate color code
   return "rgb(" + r + "," + g + "," + b + ")";
