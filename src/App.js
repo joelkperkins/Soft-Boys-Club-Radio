@@ -13,8 +13,7 @@ import { AiFillGithub } from 'react-icons/ai';
 import headerImg from './Images/text.png'
 
 const imgUrl = () => {
-  // let keyUrl = process.env.REACT_APP_ICECAST_URL + "/static/feature.jpg";
-  let keyUrl = "https://ptpimg.me/x32z31.gif";
+  let keyUrl = process.env.REACT_APP_ICECAST_URL + "/static/feature.jpg";
   return keyUrl;
 }
 
