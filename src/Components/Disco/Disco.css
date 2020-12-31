@@ -1,0 +1,31 @@
+@keyframes rotateDiscoBall {
+  0% {transform: rotateX(90deg) rotateZ(0deg) rotate(0deg); }
+  100% {transform: rotateX(90deg) rotateZ(360deg) rotate(0deg); }
+}
+
+@keyframes rotateDiscoBallMiddle {
+  0% {transform: rotateX(90deg) rotateY(0deg) rotate(0deg); }
+  100% {transform: rotateX(90deg) rotateY(-360deg) rotate(0deg); }
+}
+
+@keyframes lowerDiscoBall {
+  0% {transform: translateY(0%); }
+  100% {transform: translateY(60%); }
+}
+
+@keyframes reflect {
+  0% {opacity: 1;}
+  50% {opacity: 0.4;}  
+  100% {opacity: 1;}  
+}
+
+.square {
+  transform-style: preserve-3d;	
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  transform: rotateX(90deg) rotateY(0deg) translateZ(0px);
+}
