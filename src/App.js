@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // components
 import Player from './Components/Player/Player.component';
@@ -103,7 +103,6 @@ const App = () => {
     const getStuff = async () => {
       await axios.get(process.env.REACT_APP_DB_LINK)
         .then(response => {
-          console.log(response.data.data)
           setPoster(response.data.data[0].gigPoster)
           setGif(response.data.data[1].gigPoster)
           setZoom(response.data.data[0].zoomLink)
