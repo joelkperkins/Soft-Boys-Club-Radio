@@ -88,7 +88,7 @@ const Disco = ({spinTheBall}) => {
 
 const Container = styled.div`
   position: absolute;
-  top: -10%;
+  top: -13%;
   left: 10%;
   display: flex;
   justify-content: center;
