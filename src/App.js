@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // components
 import Player from './Components/Player/Player.component';
@@ -79,9 +79,12 @@ const getTracks = (source) => {
 const App = () => {
   const [data, setData] = useState({ tracks: [] });
   const [poster, setPoster] = useState('');
+  const [gif, setGif] = useState('');
   const [zoom, setZoom] = useState('');
   const [height, setHeight] = useState('100vh');
   const [dancing, setDancing] = useState(false);
+  const [activeBg, setActiveBg] = useState('');
+
   useEffect(() => {
     const fetchData = async () => {
 
@@ -100,7 +103,9 @@ const App = () => {
     const getStuff = async () => {
       await axios.get(process.env.REACT_APP_DB_LINK)
         .then(response => {
+          console.log(response.data.data)
           setPoster(response.data.data[0].gigPoster)
+          setGif(response.data.data[1].gigPoster)
           setZoom(response.data.data[0].zoomLink)
         })
         .catch(error => {
@@ -118,7 +123,12 @@ const App = () => {
 
   useEffect(() => {
     // do stuff with the background
-  }, [dancing])
+    if (dancing) {
+      setActiveBg(gif)
+    } else {
+      setActiveBg(poster)
+    }
+  }, [dancing, gif, poster])
 
   const openInNewTab = url => {
     var win = window.open(url, '_blank');
@@ -126,7 +136,7 @@ const App = () => {
   }
 
   return (
-    <Body id="main" height={height} img={poster} header={headerImg}>
+    <Body id="main" height={height} img={activeBg} header={headerImg}>
       <Header zoom={zoom} />
       <Player tracks={data.tracks} setDancing={() => setDancing(!dancing)} />
       <Footer onClick={() => openInNewTab('https://github.com/joelkperkins/Soft-Boys-Club-Radio')}>Wanna see how it works? <AiFillGithub size='1.3em'/> v0.1.4</Footer>
