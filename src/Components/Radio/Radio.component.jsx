@@ -10,7 +10,7 @@ import { GiPlayButton, GiPauseButton } from 'react-icons/gi';
 import { MdEject } from 'react-icons/md';
 import axios from 'axios';
 
-const Radio = ({activeTrack, setActiveTrack, setSpinTheBall}) => {
+const Radio = ({activeTrack, setActiveTrack, setSpinTheBall, setDancing}) => {
   const [status, setStatus] = useState('EMPTY');
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(false);
@@ -39,7 +39,8 @@ const Radio = ({activeTrack, setActiveTrack, setSpinTheBall}) => {
       audio.play();
       setPlaying(true);
       setStatus("PLAYING");
-      setSpinTheBall()
+      setSpinTheBall();
+      setDancing();
     } else if (audio && input === 'pause') {
       audio.pause();
       setPlaying(false);
@@ -48,6 +49,7 @@ const Radio = ({activeTrack, setActiveTrack, setSpinTheBall}) => {
       clearInterval(intervalRef.current);
       if (playing === true) {
         setSpinTheBall();
+        setDancing();
       }
     }
   }

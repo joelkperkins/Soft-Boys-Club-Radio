@@ -12,11 +12,6 @@ import { AiFillGithub } from 'react-icons/ai';
 // resouces
 import headerImg from './Images/text.png'
 
-const imgUrl = () => {
-  let keyUrl = process.env.REACT_APP_ICECAST_URL + "/static/feature.jpg";
-  return keyUrl;
-}
-
 const sslUrl = (trackUrl) => {
   let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
   return process.env.REACT_APP_ICECAST_URL + keyUrl;
@@ -82,8 +77,14 @@ const getTracks = (source) => {
 
 
 const App = () => {
-  const [data, setData] = useState({tracks: []});
+  const [data, setData] = useState({ tracks: [] });
+  const [poster, setPoster] = useState('');
+  const [gif, setGif] = useState('');
+  const [zoom, setZoom] = useState('');
   const [height, setHeight] = useState('100vh');
+  const [dancing, setDancing] = useState(false);
+  const [activeBg, setActiveBg] = useState('');
+
   useEffect(() => {
     const fetchData = async () => {
 
@@ -99,7 +100,19 @@ const App = () => {
         setData(response);
       }
     };
+    const getStuff = async () => {
+      await axios.get(process.env.REACT_APP_DB_LINK)
+        .then(response => {
+          setPoster(response.data.data[0].gigPoster)
+          setGif(response.data.data[1].gigPoster)
+          setZoom(response.data.data[0].zoomLink)
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
     fetchData();
+    getStuff();
   }, []);
 
   useEffect(() => {
@@ -107,15 +120,24 @@ const App = () => {
     setHeight(`${vh}px`);
   }, []);
 
+  useEffect(() => {
+    // do stuff with the background
+    if (dancing) {
+      setActiveBg(gif)
+    } else {
+      setActiveBg(poster)
+    }
+  }, [dancing, gif, poster])
+
   const openInNewTab = url => {
     var win = window.open(url, '_blank');
     win.focus();
   }
 
   return (
-    <Body id="main" height={height} img={imgUrl()} header={headerImg}>
-      <Header />
-      <Player tracks={data.tracks} />
+    <Body id="main" height={height} img={activeBg} header={headerImg}>
+      <Header zoom={zoom} />
+      <Player tracks={data.tracks} setDancing={() => setDancing(!dancing)} />
       <Footer onClick={() => openInNewTab('https://github.com/joelkperkins/Soft-Boys-Club-Radio')}>Wanna see how it works? <AiFillGithub size='1.3em'/> v0.1.4</Footer>
     </Body>
   );
