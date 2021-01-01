@@ -42,6 +42,7 @@ const Player = ({ tracks, setDancing }) => {
         </Top>
       </motion.div>
       {DiscoBall}
+      <Background activeTrack={activeTrack} spinTheBall={spinTheBall}/>
     </Container>
   )
 };
@@ -53,8 +54,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+`
+const Background = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
   background-color: ${props => props.activeTrack !== null  && 'rgb(0, 0, 0, .5)'};
-  background: linear-gradient(bottom left, rgb(255, 255, 255), rgb(255, 255, 255));
+  animation: ${props => props.spinTheBall === true  && 'reflect 4s forwards infinite'};
 `
 
 const Row = styled.div`
