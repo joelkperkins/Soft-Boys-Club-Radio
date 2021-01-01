@@ -41,8 +41,8 @@ const Player = ({ tracks, setDancing }) => {
           {Cassettes}
         </Top>
       </motion.div>
-      {DiscoBall}
       <Background activeTrack={activeTrack} spinTheBall={spinTheBall}/>
+      {DiscoBall}
     </Container>
   )
 };
