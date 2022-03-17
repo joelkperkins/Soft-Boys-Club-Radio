@@ -89,7 +89,7 @@ const Radio = ({activeTrack, setActiveTrack, setSpinTheBall, setDancing}) => {
   );
 
   return (
-    <THEME_BODY_GOTH id="radio-body">
+    <THEMEBODYGOTH id="radio-body">
       <RadioButtons id="radio-buttons">
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} id="radio-button">
           {activeTrack && <PlayActive onClick={() => controlAudio('play')}><GiPlayButton size='2em'/></PlayActive>}
@@ -114,14 +114,14 @@ const Radio = ({activeTrack, setActiveTrack, setSpinTheBall, setDancing}) => {
           </EjectInactive>}
         </motion.div>
       </RadioButtons>
-      <THEME_RADIO_MAIN_GOTH id="radio-insert">
-        <THEME_RADIO_INSERT_GOTH id="insert-here">
-          <THEME_SCREEN_GOTH>{statusBank[status]}</THEME_SCREEN_GOTH>
-          {activeTrack ? <Cassette track={activeTrack} reduced={true} /> : <THEME_INSERT_GOTH>------------------------------------</THEME_INSERT_GOTH>}
-        </THEME_RADIO_INSERT_GOTH>
-      </THEME_RADIO_MAIN_GOTH>
+      <THEMERADIOMAINGOTH id="radio-insert">
+        <THEMERADIOINSERTGOTH id="insert-here">
+          <THEMESCREENGOTH>{statusBank[status]}</THEMESCREENGOTH>
+          {activeTrack ? <Cassette track={activeTrack} reduced={true} /> : <THEMEINSERTGOTH>------------------------------------</THEMEINSERTGOTH>}
+        </THEMERADIOINSERTGOTH>
+      </THEMERADIOMAINGOTH>
       {activeTrack ? <audio id='audio' src={activeTrack.url} /> : <audio></audio> }
-    </THEME_BODY_GOTH>
+    </THEMEBODYGOTH>
   );
 }
 
@@ -139,7 +139,7 @@ const RadioMain = styled.div`
   align-self: flex-start;
 `;
 
-const THEME_RADIO_MAIN_GOTH = styled(RadioMain)`
+const THEMERADIOMAINGOTH = styled(RadioMain)`
   background: #E0B650;
   border: outset .4rem #FFE186;
 `;
@@ -154,7 +154,7 @@ const RadioInsert = styled.div`
   margin-left: .5rem;
 `;
 
-const THEME_RADIO_INSERT_GOTH = styled(RadioInsert)`
+const THEMERADIOINSERTGOTH = styled(RadioInsert)`
   background: #DEC38C;
 `
 
@@ -172,7 +172,7 @@ const Screen = styled.div`
   font-size: .5rem;
 `;
 
-const THEME_SCREEN_GOTH = styled(Screen)`
+const THEMESCREENGOTH = styled(Screen)`
   background: #1CB676;
   color: black;
 `
@@ -190,7 +190,7 @@ const Insert = styled.div`
   align-items: center;
 `;
 
-const THEME_INSERT_GOTH = styled(Insert)`
+const THEMEINSERTGOTH = styled(Insert)`
   border-left: inset .5rem #FFE186;
   border-bottom: inset .5rem #FFE186;
   color: white;
@@ -212,7 +212,7 @@ const RadioBody = styled.div`
   align-self: flex-end;
 `;
 
-const THEME_BODY_GOTH = styled(RadioBody)`
+const THEMEBODYGOTH = styled(RadioBody)`
   background: #E0B650;
   border: outset .3rem #FFE186;
 `
