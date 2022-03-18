@@ -56,15 +56,13 @@ const Radio = ({activeTrack, setActiveTrack, setSpinTheBall, setDancing}) => {
 
   useEffect( 
     () => {
-      const siteUrl = 'https://icecast.softboys.club:18000';
-
       const fetchData = async () => {
         //NEED ICECAST TRACK INDEX
         if (activeTrack) {
           const icecastIndex = activeTrack.id.slice(-1);
 
           const result = await axios.get(
-            siteUrl + "/status-json.xsl"
+            process.env.REACT_APP_ICECAST_URL + "/status-json.xsl"
           );
 
           //IF ONE SOURCE, ICESTATS HAS NO ARRAY
