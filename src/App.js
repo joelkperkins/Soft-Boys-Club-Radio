@@ -1,3 +1,4 @@
+// jshint ignore: start
 import React, { useState, useEffect } from 'react';
 
 // components
@@ -10,7 +11,7 @@ import styled from 'styled-components';
 import { AiFillGithub } from 'react-icons/ai';
 
 // resouces
-import headerImg from './Images/text.png'
+import headerImg from './Images/text.png';
 
 const sslUrl = (trackUrl) => {
   let keyUrl = !trackUrl ? null : trackUrl.slice(trackUrl.lastIndexOf('/'));
@@ -71,7 +72,7 @@ const getTracks = (source) => {
       heardBy: s.listener_peak || null,
       type: s.server_type || null
       })
-    )
+    );
   } 
 };
 
@@ -95,7 +96,7 @@ const App = () => {
         const response = {
           adminEmail: result.data.icestats.admin,
           tracks: getTracks(result.data.icestats.source)
-        }
+        };
   
         setData(response);
       }
@@ -103,9 +104,11 @@ const App = () => {
     const getStuff = async () => {
       await axios.get(process.env.REACT_APP_DB_LINK)
         .then(response => {
-          setPoster(response.data.data[0].gigPoster)
-          setGif(response.data.data[1].gigPoster)
-          setZoom(response.data.data[0].zoomLink)
+          if (response && response.data && response.data.length > 0) {
+            setPoster(response.data.data[0].gigPoster);
+            setGif(response.data.data[1].gigPoster);
+            setZoom(response.data.data[0].zoomLink);
+          }
         })
         .catch(error => {
           console.error(error);
@@ -123,22 +126,26 @@ const App = () => {
   useEffect(() => {
     // do stuff with the background
     if (dancing) {
-      setActiveBg(gif)
+      setActiveBg(gif);
     } else {
-      setActiveBg(poster)
+      setActiveBg(poster);
     }
-  }, [dancing, gif, poster])
+  }, [dancing, gif, poster]);
 
   const openInNewTab = url => {
     var win = window.open(url, '_blank');
     win.focus();
-  }
+  };
 
   return (
     <Body id="main" height={height} img={activeBg} header={headerImg}>
       <Header zoom={zoom} />
       <Player tracks={data.tracks} setDancing={() => setDancing(!dancing)} />
-      <Footer onClick={() => openInNewTab('https://github.com/joelkperkins/Soft-Boys-Club-Radio')}>Wanna see how it works? <AiFillGithub size='1.3em'/> v0.1.4</Footer>
+      <Footer onClick={() => openInNewTab('https://github.com/joelkperkins/Soft-Boys-Club-Radio')}>
+        Wanna see how it works? 
+        <AiFillGithub size='1.3em'/> 
+        'v0.1.6'
+      </Footer>
     </Body>
   );
 }

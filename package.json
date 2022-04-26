@@ -1,6 +1,6 @@
 {
   "name": "softboys.club",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
