@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { motion, useMotionValue } from "framer-motion"
+import { motion, useMotionValue } from "framer-motion";
 
 // function to get the x, y value of an element
 const getPos = (el) => {
   for (var ly=0, lx=0; el != null; lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
   return {x: lx, y: ly};
-}
+};
 
 const checkY = (y, trackXY, thisTrack, raidoInsertXY, activeTrack) => {
   if ((trackXY.current.y + y.get() + thisTrack.current.clientHeight >= raidoInsertXY.current.y) && (!activeTrack)) {
@@ -14,7 +14,7 @@ const checkY = (y, trackXY, thisTrack, raidoInsertXY, activeTrack) => {
   } else {
     return false;
   }
-}
+};
 
 const checkX = (x, trackXY, thisTrack, raidoInsertXY, activeTrack) => {
   if ((trackXY.current.x + x.get() + thisTrack.current.clientHeight >= raidoInsertXY.current.x) && (!activeTrack)) {
@@ -22,7 +22,7 @@ const checkX = (x, trackXY, thisTrack, raidoInsertXY, activeTrack) => {
   } else {
     return false;
   }
-}
+};
 
 const Cassette = ({activeTrack, track, index, constraintsRef, reduced, setActiveTrack}) => {
   const thisTrack = useRef();
@@ -54,19 +54,19 @@ const Cassette = ({activeTrack, track, index, constraintsRef, reduced, setActive
       }
     }
 
-    const unsubscribeY = y.onChange(checkActive)
-    const unsubscribeX = x.onChange(checkActive)
+    const unsubscribeY = y.onChange(checkActive);
+    const unsubscribeX = x.onChange(checkActive);
 
     return () => {
       unsubscribeY();
       unsubscribeX();
-    }
+    };
   }, [activeTrack, setActiveTrack, track, x, y]);
 
   if (reduced) {
     return (
       <CassetteClosed>
-        <Title>{track.genre}</Title>
+        <Title>{track.genre || 'Just Chill'}</ Title>
       </CassetteClosed> 
     )
   } else if (activeTrack === null || activeTrack.station !== track.station) {
