@@ -5,7 +5,7 @@ import Cassette from '../Cassette/Cassette.component';
 
 // libraries
 import styled from 'styled-components';
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import { GiPlayButton, GiPauseButton } from 'react-icons/gi';
 import { MdEject } from 'react-icons/md';
 import axios from 'axios';
@@ -26,13 +26,13 @@ const Radio = ({activeTrack, setActiveTrack, setSpinTheBall, setDancing}) => {
       setStatus('EMPTY');
       setAudio(null);
     }
-  }, [activeTrack])
+  }, [activeTrack]);
 
   const statusBank = {
     EMPTY: 'Please load a tape!',
     PLAYING: `Now Playing: ${nowPlaying}`,
     LOADED: `Press Play?`
-  }
+  };
 
   const controlAudio = (input) => {
     if (audio && input === 'play') {
@@ -52,7 +52,7 @@ const Radio = ({activeTrack, setActiveTrack, setSpinTheBall, setDancing}) => {
         setDancing();
       }
     }
-  }
+  };
 
   useEffect( 
     () => {
@@ -69,7 +69,11 @@ const Radio = ({activeTrack, setActiveTrack, setSpinTheBall, setDancing}) => {
           if (Array.isArray(result.data.icestats.source)) {
             setNowPlaying(result.data.icestats.source[icecastIndex].title);
           } else {
-            setNowPlaying(result.data.icestats.source.title);
+            if (result.data.icestats.source) {
+              setNowPlaying(result.data.icestats.source.title);
+            } else {
+              setNowPlaying('We have no idea what is playing!');
+            }
           }
         }
       };

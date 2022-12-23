@@ -40,14 +40,26 @@ const getTracks = (source) => {
     }, []);
   }
 
+  const defaultTrack = {
+    id: 'danke',
+    genre: null,
+    title: 'Danke',
+    url: 'http://radio.dosburros.com:8000/iorek',
+    date: null,
+    station: null,
+    desc: null,
+    heardBy: null,
+    type: null
+  };
+
   // zero sources
   if (!source) {
-    return [];
+    return [defaultTrack];
   }
   //single source
   if (!Array.isArray(source)) {
 
-    return [{
+    return [defaultTrack, {
       id: 'track0',
       genre: source.genre || null,
       title: source.title || '<no track data>',
@@ -61,7 +73,7 @@ const getTracks = (source) => {
 
   //array of sources
   } else {
-    return source.map((s, i) => ({
+    const icecastTracks = source.map((s, i) => ({
       id: 'track' + i,
       genre: s.genre || null,
       title: s.title || '<no track data>',
@@ -73,6 +85,7 @@ const getTracks = (source) => {
       type: s.server_type || null
       })
     );
+    return [defaultTrack, ...icecastTracks]
   } 
 };
 
@@ -97,7 +110,6 @@ const App = () => {
           adminEmail: result.data.icestats.admin,
           tracks: getTracks(result.data.icestats.source)
         };
-  
         setData(response);
       }
     };
