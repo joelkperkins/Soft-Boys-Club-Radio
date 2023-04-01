@@ -41,10 +41,10 @@ const getTracks = (source) => {
   }
 
   const defaultTrack = {
-    id: 'danke',
+    id: 'jungle',
     genre: null,
-    title: 'Danke',
-    url: 'http://radio.dosburros.com:8000/iorek',
+    title: 'Jungle',
+    url: process.env.REACT_APP_JUNGLE_STATION,
     date: null,
     station: null,
     desc: null,
